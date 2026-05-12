@@ -41,7 +41,8 @@
     "onView:leekFundView.forex",
     "onView:leekFundView.settings",
     "onCommand:leek-fund.toggleStatusBarIconVisibility",
-    "onCommand:leek-fund.importStockHoldings"
+    "onCommand:leek-fund.importStockHoldings",
+    "onCommand:leek-fund.setExtensionHttpProxy"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -342,6 +343,10 @@
         "command": "leek-fund.stockWindVane",
         "title": "选股风向标",
         "icon": "$(graph)"
+      },
+      {
+        "command": "leek-fund.setExtensionHttpProxy",
+        "title": "设置扩展 HTTP 代理"
       }
     ],
     "keybindings": [
@@ -707,6 +712,16 @@
           "default": "",
           "description": "由于防爬虫机制，需要用户设置雪球网站cookie"
         },
+        "leek-fund.extensionHttpProxy": {
+          "type": "string",
+          "default": "",
+          "description": "扩展专用 HTTP/HTTPS 代理（如 http://127.0.0.1:7890 或 http://user:pass@host:port）。留空时行情请求直连，且不使用 VS Code 设置里的 http.proxy。与编辑器全局代理无关。"
+        },
+        "leek-fund.extensionHttpProxyBypass": {
+          "type": "string",
+          "default": "",
+          "description": "不走扩展代理的主机列表，逗号或空格分隔。支持 localhost、*.sina.com.cn、.cn 等形式。"
+        },
         "leek-fund.fundAmount": {
           "type": "object",
           "default": {},
@@ -913,7 +928,9 @@
     "cheerio": "1.0.0",
     "compare-versions": "^3.6.0",
     "entities": "^4.5.0",
+    "http-proxy-agent": "^5.0.0",
     "http-proxy-middleware": "^3.0.3",
+    "https-proxy-agent": "^5.0.1",
     "iconv-lite": "^0.6.2",
     "lodash": "4.17.21",
     "moment": "^2.29.4",

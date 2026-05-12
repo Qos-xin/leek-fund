@@ -32,6 +32,7 @@ import { cacheStockPriceData } from './shared/stockPriceCache';
 import { updateStockPrice } from './webview/setStockPrice';
 import { startProxyServer } from './webview/proxyService/proxyService';
 import createEastMoneyDataServer from './service/eastmoney';
+import { installExtensionHttpProxy, refreshExtensionHttpProxy } from './shared/extensionHttpProxy';
 
 let loopTimer: NodeJS.Timeout | null = null;
 let binanceLoopTimer: NodeJS.Timeout | null = null;
@@ -47,6 +48,9 @@ let profitBar: ProfitStatusBar | null = null;
 export async function activate(context: ExtensionContext) {
   globalState.isDevelopment = process.env.NODE_ENV === 'development';
   globalState.context = context;
+
+  /** 扩展自有 HTTP 代理：强制 axios 不走 VS Code 的全局 http.proxy，仅认 leek-fund.extensionHttpProxy */
+  installExtensionHttpProxy();
 
   const telemetry = new Telemetry();
   globalState.telemetry = telemetry;
@@ -195,6 +199,12 @@ export async function activate(context: ExtensionContext) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   workspace.onDidChangeConfiguration((e: ConfigurationChangeEvent) => {
     Log.info('Configuration changed');
+    if (
+      e.affectsConfiguration('leek-fund.extensionHttpProxy') ||
+      e.affectsConfiguration('leek-fund.extensionHttpProxyBypass')
+    ) {
+      refreshExtensionHttpProxy();
+    }
     intervalTimeConfig = LeekFundConfig.getConfig('leek-fund.interval');
     setIntervalTime();
     setGlobalVariable();

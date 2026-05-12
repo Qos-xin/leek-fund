@@ -32,6 +32,7 @@ import StockService from './explorer/stockService';
 import globalState from './globalState';
 import FlashNewsOutputServer from './output/flash-news/FlashNewsOutputServer';
 import { LeekFundConfig } from './shared/leekConfig';
+import { refreshExtensionHttpProxy, getExtensionHttpProxySummary } from './shared/extensionHttpProxy';
 import { LeekTreeItem } from './shared/leekTreeItem';
 // import checkForUpdate from './shared/update';
 import { colorOptionList, randomColor } from './shared/utils';
@@ -604,6 +605,10 @@ export function registerViewEvent(
               label: '📥 导入设置',
               description: 'importSettings',
             },
+            {
+              label: '🌐 扩展 HTTP 代理（不用 VS Code 全局代理）',
+              description: 'extension-http-proxy',
+            },
           ],
           {
             placeHolder: '第一步：选择设置项',
@@ -707,8 +712,56 @@ export function registerViewEvent(
             commands.executeCommand('leek-fund.exportSettings');
           } else if (type === 'importSettings') {
             commands.executeCommand('leek-fund.importSettings');
+          } else if (type === 'extension-http-proxy') {
+            commands.executeCommand('leek-fund.setExtensionHttpProxy');
           }
         });
+    })
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand('leek-fund.setExtensionHttpProxy', async () => {
+      const current = String(LeekFundConfig.getConfig('leek-fund.extensionHttpProxy', '') || '');
+      const url = await window.showInputBox({
+        value: current,
+        placeHolder: '例：http://127.0.0.1:7890  留空=直连（请求不使用 VS Code 的 http.proxy）',
+        prompt: '扩展专用 HTTP/HTTPS 代理地址（可含账号密码）',
+        validateInput: (v) => {
+          const s = v.trim();
+          if (!s) {
+            return null;
+          }
+          try {
+            const u = new URL(s);
+            if (u.protocol !== 'http:' && u.protocol !== 'https:') {
+              return '仅支持 http 或 https 代理';
+            }
+          } catch {
+            return '请输入合法 URL';
+          }
+          return null;
+        },
+      });
+      if (url === undefined) {
+        return;
+      }
+      const currentBypass = String(
+        LeekFundConfig.getConfig('leek-fund.extensionHttpProxyBypass', '') || ''
+      );
+      const bypass = await window.showInputBox({
+        value: currentBypass,
+        placeHolder: '可选：localhost,127.0.0.1,*.sina.com.cn（逗号或空格分隔）',
+        prompt: '以下主机不走扩展代理（留空表示全部走代理）',
+      });
+      if (bypass === undefined) {
+        return;
+      }
+      await LeekFundConfig.setConfig('leek-fund.extensionHttpProxy', url.trim());
+      await LeekFundConfig.setConfig('leek-fund.extensionHttpProxyBypass', bypass.trim());
+      refreshExtensionHttpProxy();
+      window.showInformationMessage(
+        url.trim() ? `已保存。${getExtensionHttpProxySummary()}` : '已关闭扩展代理，将直连行情接口'
+      );
     })
   );
 
