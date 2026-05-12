@@ -46,6 +46,7 @@ import leekCenterView from './webview/leekCenterView';
 import openNews from './webview/news';
 import setAmount from './webview/setAmount';
 import setStockPrice from './webview/setStockPrice';
+import { runImportStockHoldings } from './importStockHoldings';
 
 import stockTrend from './webview/stockTrend';
 import stockTrendPic from './webview/stockTrendPic';
@@ -365,6 +366,11 @@ export function registerViewEvent(
         return;
       }
       setStockPrice(stockService);
+    })
+  );
+  context.subscriptions.push(
+    commands.registerCommand('leek-fund.importStockHoldings', () => {
+      runImportStockHoldings(stockProvider);
     })
   );
   context.subscriptions.push(

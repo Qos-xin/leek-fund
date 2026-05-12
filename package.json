@@ -40,7 +40,8 @@
     "onView:leekFundView.binance",
     "onView:leekFundView.forex",
     "onView:leekFundView.settings",
-    "onCommand:leek-fund.toggleStatusBarIconVisibility"
+    "onCommand:leek-fund.toggleStatusBarIconVisibility",
+    "onCommand:leek-fund.importStockHoldings"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -193,6 +194,11 @@
           "light": "resources/light/amount.svg",
           "dark": "resources/dark/amount.svg"
         }
+      },
+      {
+        "command": "leek-fund.importStockHoldings",
+        "title": "导入持仓股票",
+        "icon": "$(cloud-download)"
       },
       {
         "command": "leek-fund.leekCenterView",
@@ -409,6 +415,11 @@
         },
         {
           "command": "leek-fund.setStockPrice",
+          "when": "view == leekFundView.stock",
+          "group": "navigation"
+        },
+        {
+          "command": "leek-fund.importStockHoldings",
           "when": "view == leekFundView.stock",
           "group": "navigation"
         },
