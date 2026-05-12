@@ -2,7 +2,7 @@
 
 `yarn start` 启动项目后（端口默认3030）
 
-运行 `vscode extension` 时添加启动环境变量，打开韭菜中心会自动获取 http://localhost:3030 的地址内容。
+运行 `vscode extension` 时添加启动环境变量，打开盘讯中心会自动获取 http://localhost:3030 的地址内容。
 
 ```json
 {

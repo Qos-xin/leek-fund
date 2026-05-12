@@ -4,7 +4,7 @@ let verbose = false;
 function log(level = 'info', ...msg: any[]) {
   const date = new Date();
   console.log(
-    ` 🚀 「LeekFund」${date.toLocaleDateString()} ${date.toLocaleTimeString()} [${level || "info"
+    ` 🚀 「盘讯」${date.toLocaleDateString()} ${date.toLocaleTimeString()} [${level || "info"
     }] `, ...msg
   );
 }

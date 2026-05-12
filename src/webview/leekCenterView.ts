@@ -19,7 +19,7 @@ let _INITED = false;
 let panelEvents: EventEmitter;
 
 function leekCenterView(stockService: StockService, fundServices: FundService) {
-  const panel = ReusedWebviewPanel.create('leekCenterWebview', `韭菜中心`, ViewColumn.One, {
+  const panel = ReusedWebviewPanel.create('leekCenterWebview', `盘讯中心`, ViewColumn.One, {
     enableScripts: true,
     retainContextWhenHidden: true,
   });

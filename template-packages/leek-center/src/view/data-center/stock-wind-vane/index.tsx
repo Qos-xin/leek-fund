@@ -97,7 +97,7 @@ const StockWindVane: React.FC = () => {
       if (mounted && !hasReceivedUrl) {
         clearInterval(intervalId);
         console.log('StockWindVane: 获取URL超时，未收到URL消息');
-        setError('获取URL超时，代理服务可能未启动或通信失败。\n请检查：\n1. 尝试完全重启 VS Code\n2. 查看调试控制台或输出面板中的 "LeekFund" 日志，寻找 "Proxy server running" 消息以确认端口\n3. 检查是否有防火墙阻止本地连接');
+        setError('获取URL超时，代理服务可能未启动或通信失败。\n请检查：\n1. 尝试完全重启 VS Code\n2. 查看调试控制台或输出面板中的 "盘讯" 日志，寻找 "Proxy server running" 消息以确认端口\n3. 检查是否有防火墙阻止本地连接');
         setLoadingUrl(false);
       }
     }, 15000); // 15秒后超时

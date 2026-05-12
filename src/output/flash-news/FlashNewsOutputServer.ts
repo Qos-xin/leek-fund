@@ -21,7 +21,7 @@ export default class FlashNewsOutputServer implements FlashNewsServerInterface {
 
   setup() {
     if (this.isEnableOutput) {
-      this.op = window.createOutputChannel('韭菜盒子 - 快讯');
+      this.op = window.createOutputChannel('盘讯 - 快讯');
       this.flashNewsBarItem = window.createStatusBarItem(StatusBarAlignment.Right, 3);
       this.flashNewsBarItem.text = `⚡️️ ${this.newsCount}`;
       this.flashNewsBarItem.command = 'leek-fund.flash-news-show';

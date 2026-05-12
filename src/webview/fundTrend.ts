@@ -185,7 +185,7 @@ function fundTrend(
             },
             credits: {
               text:
-                '<span style="font-size:16px;color:#999999;font-family: Microsoft YaHei;">韭菜盒子</span>',
+                '<span style="font-size:16px;color:#999999;font-family: Microsoft YaHei;">盘讯</span>',
               href: 'javascript:;',
               position: {
                 align: 'center',
@@ -400,7 +400,7 @@ function fundTrend(
           //   colors: ['#4c74b1', '#a44949', '#666'],
           credits: {
             text:
-              '<span style="font-size:16px;color:#999999;font-family: Microsoft YaHei;">韭菜盒子</span>',
+              '<span style="font-size:16px;color:#999999;font-family: Microsoft YaHei;">盘讯</span>',
             href: 'javascript:;',
             position: {
               align: 'center',

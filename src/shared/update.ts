@@ -15,7 +15,7 @@ export default () => {
     console.log('currentVersion=', version);
     if (compareVersions(version, latestVerion) === -1) {
       window
-        .showInformationMessage('检查到 [韭菜盒子] 插件有新版本，是否立即升级？', '去升级', '取消')
+        .showInformationMessage('检查到 [盘讯] 插件有新版本，是否立即升级？', '去升级', '取消')
         .then((res) => {
           if (res === '去升级') {
             commands.executeCommand('workbench.extensions.action.listOutdatedExtensions');

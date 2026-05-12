@@ -336,7 +336,7 @@ export function registerViewEvent(
         // console.log('AI 分析结果 -', target?.info?.name, ' 股票代码：', target?.info?.code, '\n', consoleResult);
 
         // 输出到 OUTPUT 面板
-        const channel = window.createOutputChannel('LeekFund AI 分析');
+        const channel = window.createOutputChannel('盘讯 AI 分析');
         channel.appendLine(`==== AI 分析（${target.info.name} | ${target.info.code}）====`);
         channel.appendLine(result);
         channel.appendLine('');

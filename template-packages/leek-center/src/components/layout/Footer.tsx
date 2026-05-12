@@ -27,7 +27,7 @@ export default function LFooter() {
           }}
           type="link"
         >
-          韭菜盒子社区
+          盘讯社区
         </Button> */}
         <Button
           onClick={() => {

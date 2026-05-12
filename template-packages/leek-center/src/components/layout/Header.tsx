@@ -26,7 +26,7 @@ export default function LHeader() {
 
   return (
     <Header className={Styles.header}>
-      <div className={Styles.logo}>韭菜中心</div>
+      <div className={Styles.logo}>盘讯中心</div>
       <Menu
         onClick={handleClick}
         // theme="dark"

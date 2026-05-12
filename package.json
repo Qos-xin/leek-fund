@@ -1,7 +1,7 @@
 {
   "name": "leek-fund",
-  "displayName": "韭菜盒子",
-  "description": "韭菜盒子，VSCode 里也可以看股票 & 基金实时数据，做最好用的投资插件",
+  "displayName": "盘讯",
+  "description": "盘讯：在 VSCode 中查看股票、基金与期货实时行情，支持持仓管理与回落/涨跌提醒。",
   "version": "3.23.1",
   "author": "Nicky Lao <giscafer@outlook.com>",
   "repository": {
@@ -12,10 +12,10 @@
   "keywords": [
     "stock",
     "fund",
-    "LeekFund",
+    "盘讯",
+    "PanXun",
     "股票",
     "基金",
-    "韭菜盒子",
     "同花顺",
     "东方财富",
     "天天基金"
@@ -49,7 +49,7 @@
       "activitybar": [
         {
           "id": "leekFundMenu",
-          "title": "LeekFund",
+          "title": "盘讯",
           "icon": "resources/leekfund.svg"
         }
       ]
@@ -202,7 +202,7 @@
       },
       {
         "command": "leek-fund.leekCenterView",
-        "title": "韭菜中心",
+        "title": "盘讯中心",
         "icon": "$(home)"
       },
       {
@@ -308,19 +308,19 @@
       },
       {
         "command": "leek-fund.toggleStatusBarVisibility",
-        "title": "LeekFund: Toggle Status Bar Visibility"
+        "title": "盘讯: Toggle Status Bar Visibility"
       },
       {
         "command": "leek-fund.toggleStatusBarIconVisibility",
-        "title": "LeekFund: Toggle Status Bar Icon Visibility"
+        "title": "盘讯: Toggle Status Bar Icon Visibility"
       },
       {
         "command": "leek-fund.toggleFundBarVisibility",
-        "title": "LeekFund: Toggle Fund Bar Visibility"
+        "title": "盘讯: Toggle Fund Bar Visibility"
       },
       {
         "command": "leek-fund.toggleStockBarVisibility",
-        "title": "LeekFund: Toggle Stock Bar Visibility"
+        "title": "盘讯: Toggle Stock Bar Visibility"
       },
       {
         "command": "leek-fund.binanceSort",
@@ -764,7 +764,7 @@
         "leek-fund.flash-news": {
           "type": "boolean",
           "default": false,
-          "description": "开启快讯输出（查看 - 输出 - 韭菜盒子快讯）"
+          "description": "开启快讯输出（查看 - 输出 - 盘讯快讯）"
         },
         "leek-fund.expandAStock": {
           "type": "boolean",
@@ -848,7 +848,7 @@
       },
       {
         "view": "leekFundView.settings",
-        "contents": "\n [🏠️ 韭菜中心](command:leek-fund.leekCenterView) \n [🤖️ AI助手配置](command:leek-fund.openAiConfig) \n [🎨个性定制](command:leek-fund.customSetting)\n[💰赞助插件](command:leek-fund.donate)\n[📄使用文档](https://github.com/LeekHub/leek-fund/issues/371)\n[📚投资交流](https://github.com/LeekHub/leek-fund/issues/19)\n源码[Github](https://github.com/LeekHub/leek-fund)"
+        "contents": "\n [🏠️ 盘讯中心](command:leek-fund.leekCenterView) \n [🤖️ AI助手配置](command:leek-fund.openAiConfig) \n [🎨个性定制](command:leek-fund.customSetting)\n[💰赞助插件](command:leek-fund.donate)\n[📄使用文档](https://github.com/LeekHub/leek-fund/issues/371)\n[📚投资交流](https://github.com/LeekHub/leek-fund/issues/19)\n源码[Github](https://github.com/LeekHub/leek-fund)"
       }
     ]
   },

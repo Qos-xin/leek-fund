@@ -1,4 +1,4 @@
-# 韭菜盒子使用指南
+# 盘讯使用指南
 
 ## 目录
 
@@ -35,11 +35,11 @@
 ### 安装指引
 
 - 根据自身系统、环境。[安装 vscode](https://code.visualstudio.com/)
-- 在左侧竖状任务栏找到 Extensions → 搜索`韭菜盒子`或`LeekFund` → 安装即可
+- 在左侧竖状任务栏找到 Extensions → 搜索`盘讯`或`PanXun` → 安装即可
 
 ### 更新指引
 
-- 在发布了新版本后，在 Extensions → 搜索`韭菜盒子`或`LeekFund` → 更新安装即可
+- 在发布了新版本后，在 Extensions → 搜索`盘讯`或`PanXun` → 更新安装即可
 - 存在延迟情况，可重启 VSCode 解决
 - 如遇更新问题，请提[issues](https://github.com/LeekHub/leek-fund/issues)
 
@@ -77,7 +77,7 @@
 
 ### 图文操作指引
 
-- [VSCode 插件开发——韭菜盒子（图片如果展示不了可以看知乎的文章界面功能截图）](https://zhuanlan.zhihu.com/p/166683895)
+- [VSCode 插件开发——盘讯（图片如果展示不了可以看知乎的文章界面功能截图）](https://zhuanlan.zhihu.com/p/166683895)
 
 <!-- https://raw.githubusercontents.com/ 为GitHub raw 加速地址 -->
 
@@ -145,25 +145,25 @@
 
 ## OUTPUT 快讯消息
 
-除了韭菜中心里的新闻快讯可以查看新闻，在 OUTPUT 还支持查看金十快讯
+除了盘讯中心里的新闻快讯可以查看新闻，在 OUTPUT 还支持查看金十快讯
 
 ![OUTPUT 快讯](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/output.png)
 
-## 韭菜中心
+## 盘讯中心
 
 1、有两个入口可以进入
 
-![韭菜中心](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/home-entry.png)
+![盘讯中心](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/home-entry.png)
 
 2、进入之后可以查看基金和股票详情
 
-![韭菜中心](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/600036.png)
+![盘讯中心](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/600036.png)
 
 ## 插件配置
 
 > 打开 VSCode 插件配置文件
 
-**添加/删除股票或基金时，建议使用新增按钮模糊搜索添加（支持名称和编码搜索）**，详细可查看 [韭菜盒子使用文档](https://github.com/LeekHub/leek-fund/issues/23)
+**添加/删除股票或基金时，建议使用新增按钮模糊搜索添加（支持名称和编码搜索）**，详细可查看 [盘讯使用文档](https://github.com/LeekHub/leek-fund/issues/23)
 
 下面是插件配置说明：
 
@@ -239,7 +239,7 @@
 
 > 问题会逐渐修复和完善
 
-- 如遇页面操作无法解决的问题，可点击左下角齿轮 setting 搜 `韭菜盒子` 可进入配置文件进行修改
+- 如遇页面操作无法解决的问题，可点击左下角齿轮 setting 搜 `盘讯` 可进入配置文件进行修改
 
 - 如遇添加基金后，显示基金名称为 `Null` 请先验证下 `http://fundgz.1234567.com.cn/js/xxxxx.js?callback=a` 行的话但是插件显示 `null` 麻烦进行[群反馈问题](https://github.com/LeekHub/leek-fund/issues/19)，不行就是接口不支持，解决不了，除非有新接口。
 

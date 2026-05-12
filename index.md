@@ -1,12 +1,12 @@
-<img src="https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/leek-logo.png" alt="韭菜盒子" width="256"/>
+<img src="https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/leek-logo.png" alt="盘讯" width="256"/>
 
-# leek-fund（韭菜盒子）
+# leek-fund（盘讯）
 
 <iframe src="https://ghbtns.com/github-btn.html?user=LeekHub&repo=leek-fund&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
 
-**韭菜盒子**——VSCode 里也可以看股票 & 基金 & 期货实时数据，做最好用的投资插件。
+**盘讯**——在 VSCode 中查看股票、基金与期货实时行情，支持持仓与提醒。
 
-Leek box - Monitor the real-time data of stock & fund & future in VSCode, Be the most excellent investment extension.
+PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alerts.
 
 [![Marketplace](https://img.shields.io/visual-studio-marketplace/v/giscafer.leek-fund.svg?label=Marketplace&style=for-the-badge&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)
 [![Installs](https://img.shields.io/visual-studio-marketplace/i/giscafer.leek-fund.svg?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)
@@ -16,7 +16,7 @@ Leek box - Monitor the real-time data of stock & fund & future in VSCode, Be the
 
 ## Table of contents
 
-- [leek-fund（韭菜盒子）](#leek-fund韭菜盒子)
+- [leek-fund（盘讯）](#leek-fund盘讯)
   - [Table of contents](#table-of-contents)
   - [功能特性](#功能特性)
   - [安装使用](#安装使用)
@@ -67,8 +67,8 @@ Leek box - Monitor the real-time data of stock & fund & future in VSCode, Be the
 
 ## 插件介绍
 
-- [韭菜盒子使用文档](https://github.com/LeekHub/leek-fund/issues/371)
-- [VSCode 插件开发——韭菜盒子（图片如果展示不了可以看知乎的文章界面功能截图）](https://zhuanlan.zhihu.com/p/166683895)
+- [盘讯使用文档](https://github.com/LeekHub/leek-fund/issues/371)
+- [VSCode 插件开发——盘讯（图片如果展示不了可以看知乎的文章界面功能截图）](https://zhuanlan.zhihu.com/p/166683895)
 
 ### 概览
 
@@ -76,7 +76,7 @@ Leek box - Monitor the real-time data of stock & fund & future in VSCode, Be the
 
 ### 插件设置
 
-**添加/删除股票或基金时，建议使用新增按钮模糊搜索添加（支持名称和编码搜索）**，详细可查看 [韭菜盒子使用文档](https://github.com/LeekHub/leek-fund/issues/23)
+**添加/删除股票或基金时，建议使用新增按钮模糊搜索添加（支持名称和编码搜索）**，详细可查看 [盘讯使用文档](https://github.com/LeekHub/leek-fund/issues/23)
 
 自定义配置在 **Settings** 视图下：
 
@@ -84,19 +84,19 @@ Leek box - Monitor the real-time data of stock & fund & future in VSCode, Be the
 
 ### OUTPUT 快讯消息
 
-除了韭菜中心里的新闻快讯可以查看新闻，在 OUTPUT 还支持查看金十快讯
+除了盘讯中心里的新闻快讯可以查看新闻，在 OUTPUT 还支持查看金十快讯
 
 ![OUTPUT 快讯](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/output.png)
 
-### 韭菜中心
+### 盘讯中心
 
 1、有两个入口可以进入
 
-![韭菜中心入口](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/home-entry.png)
+![盘讯中心入口](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/home-entry.png)
 
 2、进入之后可以查看基金和股票详情
 
-![韭菜中心](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/600036.png)
+![盘讯中心](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/600036.png)
 
 ## 社区交流
 
