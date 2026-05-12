@@ -28,7 +28,8 @@ import { ProfitStatusBar } from './statusbar/Profit';
 import { StatusBar } from './statusbar/statusBar';
 import { cacheStocksRemindData } from './webview/leekCenterView';
 import { cacheFundAmountData, updateAmount } from './webview/setAmount';
-import { cacheStockPriceData, updateStockPrice } from './webview/setStockPrice';
+import { cacheStockPriceData } from './shared/stockPriceCache';
+import { updateStockPrice } from './webview/setStockPrice';
 import { startProxyServer } from './webview/proxyService/proxyService';
 import createEastMoneyDataServer from './service/eastmoney';
 

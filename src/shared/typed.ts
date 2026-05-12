@@ -40,6 +40,8 @@ export interface IAmount {
   unitPrice: number;
   earningPercent: number;
   yestEarnings?: number;
+  /** 回落告警阈值（%）：自本轮数据刷新以来最高价回撤超过该比例时提醒，0 表示关闭 */
+  pullbackAlertPercent?: number;
 }
 
 export interface FundInfo {

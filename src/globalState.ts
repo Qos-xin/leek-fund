@@ -41,6 +41,8 @@ let fundLists: Array<Array<string>> = [];
 
 let stockPrice = {}; // 缓存数据
 let stockPriceCacheDate = '2020-10-30';
+/** 持仓回落告警：每只股票自插件运行以来跟踪的阶段最高价（内存，重启后重新累计） */
+let stockPullbackPeak: Record<string, number> = {};
 
 let forexList: Array<ForexData> = []; // 外汇信息
 
@@ -89,6 +91,7 @@ export default {
 
   stockPrice,
   stockPriceCacheDate,
+  stockPullbackPeak,
 
   stockHeldTipShow,
 

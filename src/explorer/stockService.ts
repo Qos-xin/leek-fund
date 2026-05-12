@@ -3,7 +3,7 @@ import { decode } from 'iconv-lite';
 import { ExtensionContext, QuickPickItem, window } from 'vscode';
 import globalState from '../globalState';
 import { LeekTreeItem } from '../shared/leekTreeItem';
-import { executeStocksRemind } from '../shared/remindNotification';
+import { executeStocksRemind, executeStockPullbackRemind } from '../shared/remindNotification';
 import { HeldData } from '../shared/typed';
 import { calcFixedPriceNumber, events, formatNumber, randHeader, sortData } from '../shared/utils';
 import { getXueQiuToken } from '../shared/xueqiu-helper';
@@ -81,6 +81,7 @@ export default class StockService extends LeekService {
 
     const res = sortData(stockList, order);
     executeStocksRemind(res, this.stockList);
+    executeStockPullbackRemind(res);
     const oldStockList = this.stockList;
     this.stockList = res;
     events.emit('updateBar:stock-profit-refresh', this);

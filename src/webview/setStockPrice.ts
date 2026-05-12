@@ -5,7 +5,8 @@ import globalState from '../globalState';
 import { LeekFundConfig } from '../shared/leekConfig';
 import { LeekTreeItem } from '../shared/leekTreeItem';
 import { IAmount } from '../shared/typed';
-import { formatDate, getTemplateFileContent, toFixed } from '../shared/utils';
+import { cacheStockPriceData } from '../shared/stockPriceCache';
+import { getTemplateFileContent, toFixed } from '../shared/utils';
 import ReusedWebviewPanel from './ReusedWebviewPanel';
 import { cloneDeep } from 'lodash';
 
@@ -82,6 +83,7 @@ function stockDataHandler(stockService: StockService) {
       yestEarnings: amountObj[item.info.code]?.earnings || 0,
       price: item.info?.yestclose,
       priceDate: item.info?.yestPriceDate,
+      pullbackAlertPercent: amountObj[item.info?.code]?.pullbackAlertPercent || 0,
     };
   });
 
@@ -108,6 +110,7 @@ function setStockPriceCfgCb(data: IAmount[]) {
       isSellOut: item.isSellOut || false,
       earnings: item.earnings,
       priceDate: item.priceDate,
+      pullbackAlertPercent: Math.max(0, Number(item.pullbackAlertPercent) || 0),
     };
   });
   LeekFundConfig.setConfig('leek-fund.stockPrice', cfg).then(() => {
@@ -178,9 +181,6 @@ export async function updateStockPrice() {
   }
 }
 
-export function cacheStockPriceData(amountObj: Object) {
-  globalState.stockPrice = amountObj;
-  globalState.stockPriceCacheDate = formatDate(new Date());
-}
+export { cacheStockPriceData } from '../shared/stockPriceCache';
 
 export default setStockPrice;

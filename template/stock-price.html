@@ -86,6 +86,14 @@
       .unitPriceInput {
         width: 100px;
       }
+      .pullbackInput {
+        width: 72px;
+      }
+      .pullbackHint {
+        font-size: 12px;
+        color: #909399;
+        margin-left: 4px;
+      }
       .red {
         color: #f56c6c;
       }
@@ -295,6 +303,14 @@
              (isSellOut ? "checked" : "") +
             ' /><span class="unit">已清仓</span>' +
             '</div>' +
+            '<div class="unitDiv el-input">' +
+            '回落告警(%)：<input type="number" step="0.1" min="0" class="pullbackInput el-input__inner" id="' +
+            item.code +
+            '_pullback" value="' +
+            (item.pullbackAlertPercent != null && item.pullbackAlertPercent !== '' ? item.pullbackAlertPercent : 0) +
+            '" title="相对本轮刷新以来最高价的回撤比例" />' +
+            '<span class="pullbackHint">自高点回落达该%时提醒（0=关闭，需开启股价提醒总开关）</span>' +
+            '</div>' +
             '</div>';
 
           listStr += str;
@@ -481,7 +497,7 @@
       }
 
       $(function () {
-        $('.amountInput,.unitPriceInput').on('input', function (e) {
+        $('.amountInput,.unitPriceInput,.pullbackInput').on('input', function (e) {
           const value = e.target.value;
           if (value.length > 12) {
             e.target.value = value.slice(0, 12);
@@ -494,14 +510,17 @@
             let amount = $('#' + item.code).val();
             let unitPrice = $('#' + item.code + '_unit').val();
             let todayUnitPrice = $('#' + item.code + '_today_unit').val();
+            let pullbackAlertPercent = $('#' + item.code + '_pullback').val();
             let isSellOut = $('#' + item.code + '_sell_out').prop('checked');
             amount = isNaN(Number(amount)) ? 0 : Number(amount);
             unitPrice = isNaN(Number(unitPrice)) ? 0 : Number(unitPrice);
             todayUnitPrice = isNaN(Number(todayUnitPrice)) ? 0 : Number(todayUnitPrice);
+            pullbackAlertPercent = isNaN(Number(pullbackAlertPercent)) ? 0 : Math.max(0, Number(pullbackAlertPercent));
             item.amount = amount; // 持仓金额
             item.unitPrice = unitPrice; // 成本价
             item.todayUnitPrice = todayUnitPrice; // 今日成本价
             item.isSellOut = isSellOut; // 是否清仓
+            item.pullbackAlertPercent = pullbackAlertPercent;
             totalMoney += amount; // 持仓金额
             // 收益率
             if (unitPrice !== 0) {

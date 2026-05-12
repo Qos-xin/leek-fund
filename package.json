@@ -608,7 +608,7 @@
         "leek-fund.stockPrice": {
           "type": "object",
           "default": {},
-          "description": "股票持仓金额（不建议手填，格式错误影响功能）"
+          "description": "股票持仓与成本（建议用「设置股票成本价」维护）。可含 pullbackAlertPercent：持仓回落告警阈值（%），相对插件刷新周期内最高价回撤；0 表示关闭，需同时开启股价提醒总开关。"
         },
         "leek-fund.stockHeldTipShow": {
           "type": "boolean",

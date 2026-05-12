@@ -3,7 +3,7 @@ import * as os from 'os';
 import * as path from 'path';
 import globalState from './globalState';
 import { LeekFundConfig } from './shared/leekConfig';
-import { cacheStockPriceData } from './webview/setStockPrice';
+import { cacheStockPriceData } from './shared/stockPriceCache';
 
 /** 与「设置股票成本价」中保存的单条结构一致 */
 export type StockPriceEntry = {
@@ -15,10 +15,12 @@ export type StockPriceEntry = {
   isSellOut: boolean;
   earnings: number;
   priceDate: string;
+  /** 回落告警阈值（%），0 关闭 */
+  pullbackAlertPercent?: number;
 };
 
 function defaultStockPriceEntry(partial: Partial<StockPriceEntry> & { code: string }): StockPriceEntry {
-  return {
+  const entry: StockPriceEntry = {
     name: partial.name ?? '',
     amount: Number(partial.amount) || 0,
     price: partial.price ?? '',
@@ -28,6 +30,10 @@ function defaultStockPriceEntry(partial: Partial<StockPriceEntry> & { code: stri
     earnings: Number(partial.earnings) || 0,
     priceDate: partial.priceDate ?? '',
   };
+  if (partial.pullbackAlertPercent !== undefined && partial.pullbackAlertPercent !== null) {
+    entry.pullbackAlertPercent = Math.max(0, Number(partial.pullbackAlertPercent) || 0);
+  }
+  return entry;
 }
 
 /** 东方财富等导出：600000.SH、SZ000001、SH600000 */
@@ -143,6 +149,9 @@ const HEADER_ALIASES: Record<string, keyof ParsedRow> = {
   持仓数量: 'shares',
   股数: 'shares',
   数量: 'shares',
+  pullbackalertpercent: 'pullbackAlertPercent',
+  回落告警: 'pullbackAlertPercent',
+  回落: 'pullbackAlertPercent',
 };
 
 type ParsedRow = {
@@ -153,6 +162,7 @@ type ParsedRow = {
   todayUnitPrice?: number;
   isSellOut?: boolean;
   shares?: number;
+  pullbackAlertPercent?: number;
 };
 
 function mapHeaderCell(h: string): string {
@@ -207,6 +217,9 @@ function parseCSV(text: string): { rows: ParsedRow[]; errors: string[] } {
     if (colIndex.isSellOut !== undefined) {
       row.isSellOut = parseBool(cells[colIndex.isSellOut]);
     }
+    if (colIndex.pullbackAlertPercent !== undefined) {
+      row.pullbackAlertPercent = parseNumber(cells[colIndex.pullbackAlertPercent]);
+    }
     rows.push(row);
   }
   return { rows, errors };
@@ -240,8 +253,17 @@ function rowToEntry(row: ParsedRow, lineHint: string): { entry?: StockPriceEntry
       todayUnitPrice: row.todayUnitPrice,
       isSellOut: sellOut,
       code: row.code,
+      pullbackAlertPercent: row.pullbackAlertPercent,
     }),
   };
+}
+
+function pickPullback(o: Record<string, unknown>): number | undefined {
+  const raw = o.pullbackAlertPercent ?? o['回落告警'] ?? o['回落'];
+  if (raw === undefined || raw === null || String(raw).trim() === '') {
+    return undefined;
+  }
+  return Math.max(0, parseNumber(raw));
 }
 
 function parseJSON(text: string): { rows: ParsedRow[]; errors: string[] } {
@@ -272,6 +294,7 @@ function parseJSON(text: string): { rows: ParsedRow[]; errors: string[] } {
         nameRaw !== undefined && nameRaw !== null ? String(nameRaw) : undefined;
       const amountRaw = o.amount ?? o['持仓金额'];
       const unitRaw = o.unitPrice ?? o['成本价'] ?? o.cost;
+      const pb = pickPullback(o);
       rows.push({
         code,
         name,
@@ -281,6 +304,7 @@ function parseJSON(text: string): { rows: ParsedRow[]; errors: string[] } {
         todayUnitPrice: parseNumber(o.todayUnitPrice ?? o['今日成本价']),
         isSellOut: parseBool(o.isSellOut ?? o['清仓'] ?? false),
         shares: parseNumber(o.shares ?? o['持仓数量'] ?? o['股数']),
+        ...(pb !== undefined ? { pullbackAlertPercent: pb } : {}),
       });
     });
     return { rows, errors };
@@ -293,6 +317,7 @@ function parseJSON(text: string): { rows: ParsedRow[]; errors: string[] } {
       }
       const o = v as Record<string, unknown>;
       const nameRaw = o.name;
+      const pb = pickPullback(o);
       rows.push({
         code,
         name:
@@ -302,6 +327,7 @@ function parseJSON(text: string): { rows: ParsedRow[]; errors: string[] } {
         todayUnitPrice: parseNumber(o.todayUnitPrice),
         isSellOut: parseBool(o.isSellOut ?? false),
         shares: parseNumber(o.shares),
+        ...(pb !== undefined ? { pullbackAlertPercent: pb } : {}),
       });
     }
     if (rows.length === 0) {
@@ -418,10 +444,15 @@ export async function runImportStockHoldings(stockProvider: { refresh: () => voi
     return;
   }
   const prev = (globalState.stockPrice || {}) as Record<string, StockPriceEntry>;
-  const next =
-    mode.mode === 'merge'
-      ? { ...prev, ...cfg }
-      : { ...cfg };
+  let next: Record<string, StockPriceEntry>;
+  if (mode.mode === 'merge') {
+    next = { ...prev };
+    for (const code of Object.keys(cfg)) {
+      next[code] = { ...(prev[code] || {}), ...cfg[code] } as StockPriceEntry;
+    }
+  } else {
+    next = { ...cfg };
+  }
   await LeekFundConfig.setConfig('leek-fund.stockPrice', next);
   cacheStockPriceData(next);
   const codes = Object.keys(cfg);

@@ -1,6 +1,8 @@
 import { commands, window } from 'vscode';
 import globalState from '../globalState';
+import { LeekFundConfig } from './leekConfig';
 import { setStocksRemindCfgCb } from '../webview/leekCenterView';
+import { cacheStockPriceData } from './stockPriceCache';
 import { LeekTreeItem } from './leekTreeItem';
 import { FundInfo } from './typed';
 import { multi1000 } from './utils';
@@ -112,4 +114,102 @@ function showRemindNotice(info: FundInfo, msg: string) {
         break;
     }
   });
+}
+
+const _pullbackRemindedCache: Record<string, boolean> = {};
+
+/**
+ * 持仓回落告警：在 data 刷新周期内跟踪最高价，现价自最高价回撤超过设定百分比时提醒（需开启股价提醒总开关）。
+ */
+export function executeStockPullbackRemind(newStockList: Array<LeekTreeItem>) {
+  if (!newStockList.length || +globalState.remindSwitch === 0) {
+    return;
+  }
+  const peaks = globalState.stockPullbackPeak;
+  const stockPriceMap = globalState.stockPrice as Record<string, Record<string, unknown>>;
+  newStockList.forEach((stock) => {
+    try {
+      const { info } = stock;
+      const code = info.code;
+      const sp = stockPriceMap[code];
+      if (!sp) {
+        delete peaks[code];
+        return;
+      }
+      const pct = parseFloat(String(sp.pullbackAlertPercent ?? 0));
+      if (!Number.isFinite(pct) || pct <= 0) {
+        delete peaks[code];
+        return;
+      }
+      const amount = parseFloat(String(sp.amount ?? 0));
+      if (!Number.isFinite(amount) || amount <= 0 || sp.isSellOut) {
+        delete peaks[code];
+        return;
+      }
+      const current = parseFloat(String(info.price ?? '0'));
+      if (!Number.isFinite(current) || current <= 0) {
+        return;
+      }
+      let peak = peaks[code];
+      if (peak === undefined || current > peak) {
+        peaks[code] = current;
+        return;
+      }
+      const drawdown = ((peak - current) / peak) * 100;
+      if (drawdown >= pct) {
+        showPullbackRemindNotice(info, peak, current, drawdown, pct);
+        peaks[code] = current;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  });
+}
+
+function showPullbackRemindNotice(
+  info: FundInfo,
+  peak: number,
+  current: number,
+  drawdown: number,
+  threshold: number
+) {
+  const { code } = info;
+  if (_pullbackRemindedCache[code]) {
+    return;
+  }
+  _pullbackRemindedCache[code] = true;
+  setTimeout(() => {
+    _pullbackRemindedCache[code] = false;
+  }, 3000 * 60);
+  const peakStr = Number.isInteger(peak) ? String(peak) : peak.toFixed(3);
+  const curStr = Number.isInteger(current) ? String(current) : current.toFixed(3);
+  window
+    .showWarningMessage(
+      `回落提醒：「${info.name}」自阶段高点 ${peakStr} 回撤 ${drawdown.toFixed(
+        2
+      )}%（阈值 ${threshold}%），现价 ${curStr}`,
+      '清除该股回落告警',
+      '关闭所有提醒'
+    )
+    .then((res) => {
+      switch (res) {
+        case '关闭所有提醒':
+          commands.executeCommand('leek-fund.toggleRemindSwitch', 0);
+          break;
+        case '清除该股回落告警': {
+          const prev = globalState.stockPrice as Record<string, Record<string, unknown>>;
+          if (prev[code]) {
+            const cfg = { ...prev };
+            cfg[code] = { ...cfg[code], pullbackAlertPercent: 0 };
+            LeekFundConfig.setConfig('leek-fund.stockPrice', cfg).then(() => {
+              cacheStockPriceData(cfg);
+            });
+          }
+          delete globalState.stockPullbackPeak[code];
+          break;
+        }
+        default:
+          break;
+      }
+    });
 }
