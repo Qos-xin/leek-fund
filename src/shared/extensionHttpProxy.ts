@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { workspace } from 'vscode';
 import { HttpProxyAgent } from 'http-proxy-agent';
 import { HttpsProxyAgent } from 'https-proxy-agent';
-import { LeekFundConfig } from './leekConfig';
 
 let httpsProxyAgent: HttpsProxyAgent | undefined;
 let httpProxyAgent: HttpProxyAgent | undefined;
@@ -56,11 +56,16 @@ function resolveAbsoluteUrl(config: AxiosRequestConfig): string | null {
 }
 
 function readProxySettings(): { proxyUrl: string; bypassRaw: string } {
-  const proxyUrl = String(LeekFundConfig.getConfig('leek-fund.extensionHttpProxy', '') || '').trim();
-  const bypassRaw = String(
-    LeekFundConfig.getConfig('leek-fund.extensionHttpProxyBypass', '') || ''
-  ).trim();
-  return { proxyUrl, bypassRaw };
+  const cfg = workspace.getConfiguration();
+  return {
+    proxyUrl: String(cfg.get('leek-fund.extensionHttpProxy', '') ?? '').trim(),
+    bypassRaw: String(cfg.get('leek-fund.extensionHttpProxyBypass', '') ?? '').trim(),
+  };
+}
+
+/** 供命令面板等读取当前值（不用 LeekFundConfig.getConfig，避免非数组配置的默认值歧义） */
+export function readExtensionHttpProxyUiState(): { proxyUrl: string; bypassRaw: string } {
+  return readProxySettings();
 }
 
 export function refreshExtensionHttpProxy(): void {

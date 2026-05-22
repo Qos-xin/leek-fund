@@ -32,7 +32,7 @@ import StockService from './explorer/stockService';
 import globalState from './globalState';
 import FlashNewsOutputServer from './output/flash-news/FlashNewsOutputServer';
 import { LeekFundConfig } from './shared/leekConfig';
-import { refreshExtensionHttpProxy, getExtensionHttpProxySummary } from './shared/extensionHttpProxy';
+import { refreshExtensionHttpProxy, getExtensionHttpProxySummary, readExtensionHttpProxyUiState } from './shared/extensionHttpProxy';
 import { LeekTreeItem } from './shared/leekTreeItem';
 // import checkForUpdate from './shared/update';
 import { colorOptionList, randomColor } from './shared/utils';
@@ -721,7 +721,7 @@ export function registerViewEvent(
 
   context.subscriptions.push(
     commands.registerCommand('leek-fund.setExtensionHttpProxy', async () => {
-      const current = String(LeekFundConfig.getConfig('leek-fund.extensionHttpProxy', '') || '');
+      const { proxyUrl: current, bypassRaw: currentBypass } = readExtensionHttpProxyUiState();
       const url = await window.showInputBox({
         value: current,
         placeHolder: '例：http://127.0.0.1:7890  留空=直连（请求不使用 VS Code 的 http.proxy）',
@@ -745,9 +745,6 @@ export function registerViewEvent(
       if (url === undefined) {
         return;
       }
-      const currentBypass = String(
-        LeekFundConfig.getConfig('leek-fund.extensionHttpProxyBypass', '') || ''
-      );
       const bypass = await window.showInputBox({
         value: currentBypass,
         placeHolder: '可选：localhost,127.0.0.1,*.sina.com.cn（逗号或空格分隔）',
