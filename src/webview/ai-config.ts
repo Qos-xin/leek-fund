@@ -24,12 +24,12 @@ export class AiConfigView {
 
   private getAiConfig(): AiConfig {
     const config = workspace.getConfiguration();
-    const aiConfig = config.get('leek-fund.aiConfig', {
+    const aiConfig = config.get('panxun.aiConfig', {
       apiKey: '',
       baseUrl: '',
       model: '',
     });
-    const aiStockHistoryRange = config.get('leek-fund.aiStockHistoryRange', '3m');
+    const aiStockHistoryRange = config.get('panxun.aiStockHistoryRange', '3m');
     
     return {
       ...aiConfig,
@@ -42,8 +42,8 @@ export class AiConfigView {
     const { aiStockHistoryRange, ...restConfig } = aiConfig;
     
     Promise.all([
-      config.update('leek-fund.aiConfig', restConfig, true),
-      config.update('leek-fund.aiStockHistoryRange', aiStockHistoryRange, true),
+      config.update('panxun.aiConfig', restConfig, true),
+      config.update('panxun.aiStockHistoryRange', aiStockHistoryRange, true),
     ]).then(
       () => {
         window.showInformationMessage('AI 配置已更新');

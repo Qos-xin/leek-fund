@@ -14,7 +14,7 @@ export default class FlashNewsOutputServer implements FlashNewsServerInterface {
   unregisterServer: (() => void) | undefined;
 
   constructor() {
-    this.isEnableOutput = LeekFundConfig.getConfig('leek-fund.flash-news');
+    this.isEnableOutput = LeekFundConfig.getConfig('panxun.flash-news');
     this.updateNewsBarItem = throttle(this.updateNewsBarItem, 1000);
     this.setup();
   }
@@ -24,14 +24,14 @@ export default class FlashNewsOutputServer implements FlashNewsServerInterface {
       this.op = window.createOutputChannel('盘讯 - 快讯');
       this.flashNewsBarItem = window.createStatusBarItem(StatusBarAlignment.Right, 3);
       this.flashNewsBarItem.text = `⚡️️ ${this.newsCount}`;
-      this.flashNewsBarItem.command = 'leek-fund.flash-news-show';
+      this.flashNewsBarItem.command = 'panxun.flash-news-show';
       this.flashNewsBarItem.show();
       this.unregisterServer = FlashNewsDaemon.registerServer(this);
     }
   }
 
   reload() {
-    const _enable: boolean = LeekFundConfig.getConfig('leek-fund.flash-news');
+    const _enable: boolean = LeekFundConfig.getConfig('panxun.flash-news');
     if (this.isEnableOutput !== _enable) {
       this.isEnableOutput = _enable;
       if (!_enable) {

@@ -104,7 +104,7 @@ function showRemindNotice(info: FundInfo, msg: string) {
   window.showWarningMessage(msg, '删除该股提醒', '关闭所有提醒').then((res) => {
     switch (res) {
       case '关闭所有提醒':
-        commands.executeCommand('leek-fund.toggleRemindSwitch', 0);
+        commands.executeCommand('panxun.toggleRemindSwitch', 0);
         break;
       case '删除该股提醒':
         let newCfg = { ...globalState.stocksRemind };
@@ -194,14 +194,14 @@ function showPullbackRemindNotice(
     .then((res) => {
       switch (res) {
         case '关闭所有提醒':
-          commands.executeCommand('leek-fund.toggleRemindSwitch', 0);
+          commands.executeCommand('panxun.toggleRemindSwitch', 0);
           break;
         case '清除该股回落告警': {
           const prev = globalState.stockPrice as Record<string, Record<string, unknown>>;
           if (prev[code]) {
             const cfg = { ...prev };
             cfg[code] = { ...cfg[code], pullbackAlertPercent: 0 };
-            LeekFundConfig.setConfig('leek-fund.stockPrice', cfg).then(() => {
+            LeekFundConfig.setConfig('panxun.stockPrice', cfg).then(() => {
               cacheStockPriceData(cfg);
             });
           }

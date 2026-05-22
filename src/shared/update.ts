@@ -3,7 +3,7 @@ import axios from 'axios';
 const compareVersions = require('compare-versions');
 
 export default () => {
-  const leekFundExt = extensions.getExtension('giscafer.leek-fund');
+  const leekFundExt = extensions.getExtension('giscafer.panxun');
   const version = leekFundExt?.packageJSON?.version;
 
   // tags 没找到分页查询，数据大的时候考虑删除过旧的tags

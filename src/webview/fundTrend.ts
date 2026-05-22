@@ -20,7 +20,7 @@ function fundTrend(
   panel.webview.onDidReceiveMessage((message) => {
     switch (message.name) {
       case 'immersiveBackground':
-        commands.executeCommand('leek-fund.immersiveBackground', message.value);
+        commands.executeCommand('panxun.immersiveBackground', message.value);
     }
   });
   panel.webview.html = `<html>

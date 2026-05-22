@@ -58,8 +58,8 @@ function resolveAbsoluteUrl(config: AxiosRequestConfig): string | null {
 function readProxySettings(): { proxyUrl: string; bypassRaw: string } {
   const cfg = workspace.getConfiguration();
   return {
-    proxyUrl: String(cfg.get('leek-fund.extensionHttpProxy', '') ?? '').trim(),
-    bypassRaw: String(cfg.get('leek-fund.extensionHttpProxyBypass', '') ?? '').trim(),
+    proxyUrl: String(cfg.get('panxun.extensionHttpProxy', '') ?? '').trim(),
+    bypassRaw: String(cfg.get('panxun.extensionHttpProxyBypass', '') ?? '').trim(),
   };
 }
 
@@ -87,7 +87,7 @@ export function refreshExtensionHttpProxy(): void {
 
 /**
  * 安装 axios 拦截器：禁用 VS Code / 环境变量带来的代理行为（每请求 proxy: false），
- * 仅当配置 leek-fund.extensionHttpProxy 时使用扩展自有代理。
+ * 仅当配置 panxun.extensionHttpProxy 时使用扩展自有代理。
  * 须在首次发起网络请求前调用一次。
  */
 export function installExtensionHttpProxy(): void {

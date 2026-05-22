@@ -21,12 +21,12 @@ export class StockProvider implements TreeDataProvider<LeekTreeItem> {
 
   constructor(service: StockService) {
     this.service = service;
-    this.order = LeekFundConfig.getConfig('leek-fund.stockSort') || SortType.NORMAL;
-    this.expandAStock = LeekFundConfig.getConfig('leek-fund.expandAStock', true);
-    this.expandHKStock = LeekFundConfig.getConfig('leek-fund.expandHKStock', false);
-    this.expandUSStock = LeekFundConfig.getConfig('leek-fund.expandUSStock', false);
-    this.expandCNFuture = LeekFundConfig.getConfig('leek-fund.expandCNFuture', false);
-    this.expandOverseaFuture = LeekFundConfig.getConfig('leek-fund.expandOverseaFuture', false);
+    this.order = LeekFundConfig.getConfig('panxun.stockSort') || SortType.NORMAL;
+    this.expandAStock = LeekFundConfig.getConfig('panxun.expandAStock', true);
+    this.expandHKStock = LeekFundConfig.getConfig('panxun.expandHKStock', false);
+    this.expandUSStock = LeekFundConfig.getConfig('panxun.expandUSStock', false);
+    this.expandCNFuture = LeekFundConfig.getConfig('panxun.expandCNFuture', false);
+    this.expandOverseaFuture = LeekFundConfig.getConfig('panxun.expandOverseaFuture', false);
   }
 
   refresh(): any {
@@ -36,7 +36,7 @@ export class StockProvider implements TreeDataProvider<LeekTreeItem> {
   getChildren(element?: LeekTreeItem | undefined): LeekTreeItem[] | Thenable<LeekTreeItem[]> {
     if (!element) {
       // Root view
-      const stockCodes = LeekFundConfig.getConfig('leek-fund.stocks') || [];
+      const stockCodes = LeekFundConfig.getConfig('panxun.stocks') || [];
       // const stockList: string[] = uniq(compact(flattenDeep(stockCodes)));
       return this.service.getData(stockCodes, this.order).then(() => {
         return this.getRootNodes();
@@ -206,7 +206,7 @@ export class StockProvider implements TreeDataProvider<LeekTreeItem> {
     } else if (order === 0) {
       this.order = SortType.NORMAL;
     }
-    LeekFundConfig.setConfig('leek-fund.stockSort', this.order);
+    LeekFundConfig.setConfig('panxun.stockSort', this.order);
     this.refresh();
   }
 }

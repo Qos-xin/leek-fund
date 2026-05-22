@@ -211,10 +211,10 @@ export class LeekTreeItem extends TreeItem {
       this.command = {
         title: name, // 标题
         command: isStockItem
-          ? 'leek-fund.stockItemClick'
+          ? 'panxun.stockItemClick'
           : isBinanceItem
-          ? 'leek-fund.binanceItemClick'
-          : 'leek-fund.fundItemClick', // 命令 ID
+          ? 'panxun.binanceItemClick'
+          : 'panxun.fundItemClick', // 命令 ID
         arguments: [
           isStockItem ? '0' + symbol : code, // 基金/股票编码
           name, // 基金/股票名称

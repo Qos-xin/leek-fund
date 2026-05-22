@@ -7,7 +7,7 @@ import { showAiAnalysisPanel } from './utils/aiAnalysisPanel';
  * 获取设置文件的默认路径
  * 优先选择当前工作区目录，如果没有工作区则选择下载目录
  */
-function getDefaultSettingsPath(filename: string = 'leek-fund.settings.json'): string {
+function getDefaultSettingsPath(filename: string = 'panxun.settings.json'): string {
   const workspaceFolders = workspace.workspaceFolders;
 
   if (workspaceFolders && workspaceFolders.length > 0) {
@@ -72,32 +72,32 @@ export function registerViewEvent(
   const binanceService = new BinanceService(context);
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.toggleFlashNews', () => {
-      const isEnable = LeekFundConfig.getConfig('leek-fund.flash-news');
-      LeekFundConfig.setConfig('leek-fund.flash-news', !isEnable).then(() => {
+    commands.registerCommand('panxun.toggleFlashNews', () => {
+      const isEnable = LeekFundConfig.getConfig('panxun.flash-news');
+      LeekFundConfig.setConfig('panxun.flash-news', !isEnable).then(() => {
         window.showInformationMessage(`已${isEnable ? '关闭' : '启用'} OUTPUT 的 Flash News！`);
       });
     })
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.refreshFollow', () => {
+    commands.registerCommand('panxun.refreshFollow', () => {
       newsProvider.refresh();
       window.showInformationMessage(`刷新成功`);
     })
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.flash-news-show', () => {
+    commands.registerCommand('panxun.flash-news-show', () => {
       flashNewsOutputServer.showOutput();
     })
   );
 
   // Fund operation
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.refreshFund', () => {
-      globalState.fundGroups = LeekFundConfig.getConfig('leek-fund.fundGroups', []);
-      globalState.fundLists = LeekFundConfig.getConfig('leek-fund.funds', []);
+    commands.registerCommand('panxun.refreshFund', () => {
+      globalState.fundGroups = LeekFundConfig.getConfig('panxun.fundGroups', []);
+      globalState.fundLists = LeekFundConfig.getConfig('panxun.funds', []);
       fundProvider.refresh();
       const handler = window.setStatusBarMessage(`基金数据已刷新`);
       setTimeout(() => {
@@ -106,7 +106,7 @@ export function registerViewEvent(
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.deleteFund', (target) => {
+    commands.registerCommand('panxun.deleteFund', (target) => {
       LeekFundConfig.removeFundCfg(target.id, () => {
         fundService.fundList = [];
         fundProvider.refresh();
@@ -114,7 +114,7 @@ export function registerViewEvent(
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.addFund', (target) => {
+    commands.registerCommand('panxun.addFund', (target) => {
       /* if (!service.fundSuggestList.length) {
         service.getFundSuggestList();
         window.showInformationMessage(`获取基金数据中，请稍后再试`);
@@ -133,7 +133,7 @@ export function registerViewEvent(
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.addFundGroup', () => {
+    commands.registerCommand('panxun.addFundGroup', () => {
       window.showInputBox({ placeHolder: '请输入基金分组名称' }).then((name) => {
         if (!name) {
           return;
@@ -145,7 +145,7 @@ export function registerViewEvent(
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.removeFundGroup', (target) => {
+    commands.registerCommand('panxun.removeFundGroup', (target) => {
       LeekFundConfig.removeFundGroupCfg(target.id, () => {
         fundService.fundList = [];
         fundProvider.refresh();
@@ -153,7 +153,7 @@ export function registerViewEvent(
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.renameFundGroup', (target) => {
+    commands.registerCommand('panxun.renameFundGroup', (target) => {
       window.showInputBox({ placeHolder: '请输入基金分组名称' }).then((name) => {
         if (!name) {
           return;
@@ -165,13 +165,13 @@ export function registerViewEvent(
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.sortFund', () => {
+    commands.registerCommand('panxun.sortFund', () => {
       fundProvider.changeOrder();
       fundProvider.refresh();
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.sortAmountFund', () => {
+    commands.registerCommand('panxun.sortAmountFund', () => {
       fundProvider.changeAmountOrder();
       fundProvider.refresh();
     })
@@ -179,7 +179,7 @@ export function registerViewEvent(
 
   // Stock operation
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.refreshStock', () => {
+    commands.registerCommand('panxun.refreshStock', () => {
       stockProvider.refresh();
       const handler = window.setStatusBarMessage(`股票数据已刷新`);
       setTimeout(() => {
@@ -188,21 +188,21 @@ export function registerViewEvent(
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.deleteStock', (target) => {
+    commands.registerCommand('panxun.deleteStock', (target) => {
       LeekFundConfig.removeStockCfg(target.id, () => {
         stockProvider.refresh();
       });
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.addStockToBar', (target) => {
+    commands.registerCommand('panxun.addStockToBar', (target) => {
       LeekFundConfig.addStockToBarCfg(target.id, () => {
         stockProvider.refresh();
       });
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.leekCenterView', () => {
+    commands.registerCommand('panxun.leekCenterView', () => {
       if (stockService.stockList.length === 0 && fundService.fundList.length === 0) {
         window.showWarningMessage('数据刷新中，请稍候！');
         return;
@@ -211,7 +211,7 @@ export function registerViewEvent(
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.addStock', () => {
+    commands.registerCommand('panxun.addStock', () => {
       // vscode QuickPick 不支持动态查询，只能用此方式解决
       // https://github.com/microsoft/vscode/issues/23633
       const qp = window.createQuickPick();
@@ -251,7 +251,7 @@ export function registerViewEvent(
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.sortStock', () => {
+    commands.registerCommand('panxun.sortStock', () => {
       stockProvider.changeOrder();
       stockProvider.refresh();
     })
@@ -262,40 +262,40 @@ export function registerViewEvent(
    */
   // 股票点击
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.stockItemClick', (code, name, text, stockCode) =>
+    commands.registerCommand('panxun.stockItemClick', (code, name, text, stockCode) =>
       stockTrend(code, name, stockCode)
     )
   );
   // 基金点击
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.fundItemClick', (code, name) => fundTrend(code, name))
+    commands.registerCommand('panxun.fundItemClick', (code, name) => fundTrend(code, name))
   );
   // 基金右键历史信息点击
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.viewFundHistory', (item) => fundHistory(item))
+    commands.registerCommand('panxun.viewFundHistory', (item) => fundHistory(item))
   );
   // 基金持仓
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.viewFundPosition', (item) => fundPosition(item))
+    commands.registerCommand('panxun.viewFundPosition', (item) => fundPosition(item))
   );
   // 基金排行
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.viewFundRank', () => fundRank())
+    commands.registerCommand('panxun.viewFundRank', () => fundRank())
   );
   // 基金走势图
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.viewFundTrend', () => allFundTrend(fundService))
+    commands.registerCommand('panxun.viewFundTrend', () => allFundTrend(fundService))
   );
   // 资金流向
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.viewFundFlow', () => fundFlow())
+    commands.registerCommand('panxun.viewFundFlow', () => fundFlow())
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.viewMainFundFlow', () => mainFundFlow())
+    commands.registerCommand('panxun.viewMainFundFlow', () => mainFundFlow())
   );
   // 基金置顶
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setFundTop', (target) => {
+    commands.registerCommand('panxun.setFundTop', (target) => {
       LeekFundConfig.setFundTopCfg(target.id, () => {
         fundProvider.refresh();
       });
@@ -303,7 +303,7 @@ export function registerViewEvent(
   );
   // 股票置顶
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setStockTop', (target) => {
+    commands.registerCommand('panxun.setStockTop', (target) => {
       LeekFundConfig.setStockTopCfg(target.id, () => {
         fundProvider.refresh();
       });
@@ -311,7 +311,7 @@ export function registerViewEvent(
   );
   // 股票上移
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setStockUp', (target) => {
+    commands.registerCommand('panxun.setStockUp', (target) => {
       LeekFundConfig.setStockUpCfg(target.id, () => {
         fundProvider.refresh();
       });
@@ -319,7 +319,7 @@ export function registerViewEvent(
   );
   // 股票下移
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setStockDown', (target) => {
+    commands.registerCommand('panxun.setStockDown', (target) => {
       LeekFundConfig.setStockDownCfg(target.id, () => {
         fundProvider.refresh();
       });
@@ -327,7 +327,7 @@ export function registerViewEvent(
   );
   // AI分析股票
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.aiStockAnalysis', async (target) => {
+    commands.registerCommand('panxun.aiStockAnalysis', async (target) => {
       const { XuanGuBaoNewsView } = require('./webview/xuangubao-news');
       const xuanGuBaoNewsView = XuanGuBaoNewsView.getInstance();
       const result = await xuanGuBaoNewsView.send_ai_stock_analysis(target);
@@ -351,7 +351,7 @@ export function registerViewEvent(
 
   // 设置基金持仓金额
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setFundAmount', () => {
+    commands.registerCommand('panxun.setFundAmount', () => {
       if (fundService.fundList.length === 0) {
         window.showWarningMessage('数据刷新中，请重试！');
         return;
@@ -361,7 +361,7 @@ export function registerViewEvent(
   );
   // 设置股票成本价
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setStockPrice', () => {
+    commands.registerCommand('panxun.setStockPrice', () => {
       if (stockService.stockList.length === 0) {
         window.showWarningMessage('数据刷新中，请重试！');
         return;
@@ -370,12 +370,12 @@ export function registerViewEvent(
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.importStockHoldings', () => {
+    commands.registerCommand('panxun.importStockHoldings', () => {
       runImportStockHoldings(stockProvider);
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.stockTrendPic', (target) => {
+    commands.registerCommand('panxun.stockTrendPic', (target) => {
       const { code, name, type, symbol } = target.info;
       stockTrendPic(code, name, `${type}${symbol}`);
     })
@@ -385,12 +385,12 @@ export function registerViewEvent(
    * News command
    */
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.newItemClick', (userName, userId) => {
+    commands.registerCommand('panxun.newItemClick', (userName, userId) => {
       openNews(newsService, userId, userName);
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.viewUserTimeline', (target) => {
+    commands.registerCommand('panxun.viewUserTimeline', (target) => {
       const userName = target.label;
       const userId = target.id;
       openNews(newsService, userId, userName, true);
@@ -398,14 +398,14 @@ export function registerViewEvent(
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.addNews', () => {
+    commands.registerCommand('panxun.addNews', () => {
       window
         .showInputBox({ placeHolder: '请输入雪球用户ID（进入用户首页复制最后的数字串）' })
         .then(async (id) => {
           if (!id) {
             return;
           }
-          const newsUserIds = LeekFundConfig.getConfig('leek-fund.newsUserIds') || [];
+          const newsUserIds = LeekFundConfig.getConfig('panxun.newsUserIds') || [];
           if (newsUserIds.includes(id)) {
             window.showInformationMessage(`ID为 ${id} 的用户已存在，无需添加`);
             return;
@@ -414,7 +414,7 @@ export function registerViewEvent(
             const list = await newsService.getNewsUserList([id]);
             if (list.length === 1) {
               newsUserIds.push(id);
-              LeekFundConfig.setConfig('leek-fund.newsUserIds', newsUserIds).then(() => {
+              LeekFundConfig.setConfig('panxun.newsUserIds', newsUserIds).then(() => {
                 newsProvider.refresh();
               });
             }
@@ -426,17 +426,17 @@ export function registerViewEvent(
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.deleteUser', (target) => {
-      const newsUserIds = LeekFundConfig.getConfig('leek-fund.newsUserIds') || [];
+    commands.registerCommand('panxun.deleteUser', (target) => {
+      const newsUserIds = LeekFundConfig.getConfig('panxun.newsUserIds') || [];
       const newIds = newsUserIds.filter((id: string) => id !== target.id);
-      LeekFundConfig.setConfig('leek-fund.newsUserIds', newIds).then(() => {
+      LeekFundConfig.setConfig('panxun.newsUserIds', newIds).then(() => {
         newsProvider.refresh();
       });
     })
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setXueqiuCookie', () => {
+    commands.registerCommand('panxun.setXueqiuCookie', () => {
       window
         .showInputBox({
           placeHolder:
@@ -447,7 +447,7 @@ export function registerViewEvent(
           if (!cookie) {
             return;
           }
-          LeekFundConfig.setConfig('leek-fund.xueqiuCookie', cookie).then(() => {
+          LeekFundConfig.setConfig('panxun.xueqiuCookie', cookie).then(() => {
             newsProvider.refresh();
           });
         });
@@ -458,14 +458,14 @@ export function registerViewEvent(
    * Binance command
    */
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.refreshBinance', () => {
+    commands.registerCommand('panxun.refreshBinance', () => {
       binanceProvider?.refresh();
     })
   );
 
   /* 添加交易对 */
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.addBinancePair', async () => {
+    commands.registerCommand('panxun.addBinancePair', async () => {
       const pairsList = await binanceService.getParis();
       window.showQuickPick(pairsList, { placeHolder: '请输入交易对' }).then((pair) => {
         if (!pair) return;
@@ -476,7 +476,7 @@ export function registerViewEvent(
 
   /* 删除交易对 */
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.deletePair', (target) => {
+    commands.registerCommand('panxun.deletePair', (target) => {
       LeekFundConfig.removeBinanceCfg(target.id, () => {
         binanceProvider?.refresh();
       });
@@ -485,7 +485,7 @@ export function registerViewEvent(
 
   /* 交易对置顶 */
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setPairTop', (target) => {
+    commands.registerCommand('panxun.setPairTop', (target) => {
       LeekFundConfig.setBinanceTopCfg(target.id, () => {
         binanceProvider?.refresh();
       });
@@ -494,21 +494,21 @@ export function registerViewEvent(
 
   /* 排序 */
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.binanceSort', () => {
+    commands.registerCommand('panxun.binanceSort', () => {
       binanceProvider.changeOrder();
     })
   );
 
   /* 点击交易对 */
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.binanceItemClick', (code, name) => binanceTrend(name))
+    commands.registerCommand('panxun.binanceItemClick', (code, name) => binanceTrend(name))
   );
 
   /**
    * Forex command
    */
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.refreshForex', () => {
+    commands.registerCommand('panxun.refreshForex', () => {
       forexProvider.refresh();
     })
   );
@@ -517,7 +517,7 @@ export function registerViewEvent(
    * Settings command
    */
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.hideText', () => {
+    commands.registerCommand('panxun.hideText', () => {
       fundService.toggleLabel();
       stockService.toggleLabel();
       fundProvider.refresh();
@@ -526,7 +526,7 @@ export function registerViewEvent(
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setStockStatusBar', () => {
+    commands.registerCommand('panxun.setStockStatusBar', () => {
       const stockList = stockService.stockList;
       const stockNameList = stockList.map((item: LeekTreeItem) => {
         return {
@@ -558,7 +558,7 @@ export function registerViewEvent(
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.customSetting', () => {
+    commands.registerCommand('panxun.customSetting', () => {
       const colorList = colorOptionList();
 
       window
@@ -634,21 +634,21 @@ export function registerViewEvent(
                   color = randomColor();
                 }
                 LeekFundConfig.setConfig(
-                  type === 'statusbar-rise' ? 'leek-fund.riseColor' : 'leek-fund.fallColor',
+                  type === 'statusbar-rise' ? 'panxun.riseColor' : 'panxun.fallColor',
                   color
                 );
               });
           } else if (type === 'statusbar-stock') {
             // 状态栏股票设置
-            commands.executeCommand('leek-fund.setStockStatusBar');
+            commands.executeCommand('panxun.setStockStatusBar');
           } else if (type === 'toggle-status-bar') {
-            commands.executeCommand('leek-fund.toggleStatusBarVisibility');
+            commands.executeCommand('panxun.toggleStatusBarVisibility');
           } else if (type === 'toggle-fund-bar') {
-            commands.executeCommand('leek-fund.toggleFundBarVisibility');
+            commands.executeCommand('panxun.toggleFundBarVisibility');
           } else if (type === 'toggle-stock-bar') {
-            commands.executeCommand('leek-fund.toggleStockBarVisibility');
+            commands.executeCommand('panxun.toggleStockBarVisibility');
           } else if (type === 'toggle-status-bar-icon') {
-            commands.executeCommand('leek-fund.toggleStatusBarIconVisibility');
+            commands.executeCommand('panxun.toggleStatusBarIconVisibility');
           } else if (type === 'icontype') {
             // 基金&股票涨跌图标
             window
@@ -692,35 +692,35 @@ export function registerViewEvent(
                   return;
                 }
                 if (globalState.iconType !== iconItem.description) {
-                  LeekFundConfig.setConfig('leek-fund.iconType', iconItem.description);
+                  LeekFundConfig.setConfig('panxun.iconType', iconItem.description);
                   globalState.iconType = iconItem.description;
                 }
               });
           } else if (type === 'earnings') {
             const newValue = globalState.showEarnings === 1 ? 0 : 1;
-            LeekFundConfig.setConfig('leek-fund.showEarnings', newValue);
+            LeekFundConfig.setConfig('panxun.showEarnings', newValue);
             globalState.showEarnings = newValue;
           } else if (type === 'hideText') {
-            commands.executeCommand('leek-fund.hideText');
+            commands.executeCommand('panxun.hideText');
           } else if (type === 'remindSwitch') {
-            commands.executeCommand('leek-fund.toggleRemindSwitch');
+            commands.executeCommand('panxun.toggleRemindSwitch');
           } else if (type === 'kLineChartSwitch') {
-            commands.executeCommand('leek-fund.toggleKLineChartSwitch');
+            commands.executeCommand('panxun.toggleKLineChartSwitch');
           } else if (type === 'stockHeldTipShow') {
-            commands.executeCommand('leek-fund.toggleStockHeldTipShow');
+            commands.executeCommand('panxun.toggleStockHeldTipShow');
           } else if (type === 'exportSettings') {
-            commands.executeCommand('leek-fund.exportSettings');
+            commands.executeCommand('panxun.exportSettings');
           } else if (type === 'importSettings') {
-            commands.executeCommand('leek-fund.importSettings');
+            commands.executeCommand('panxun.importSettings');
           } else if (type === 'extension-http-proxy') {
-            commands.executeCommand('leek-fund.setExtensionHttpProxy');
+            commands.executeCommand('panxun.setExtensionHttpProxy');
           }
         });
     })
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setExtensionHttpProxy', async () => {
+    commands.registerCommand('panxun.setExtensionHttpProxy', async () => {
       const { proxyUrl: current, bypassRaw: currentBypass } = readExtensionHttpProxyUiState();
       const url = await window.showInputBox({
         value: current,
@@ -753,8 +753,8 @@ export function registerViewEvent(
       if (bypass === undefined) {
         return;
       }
-      await LeekFundConfig.setConfig('leek-fund.extensionHttpProxy', url.trim());
-      await LeekFundConfig.setConfig('leek-fund.extensionHttpProxyBypass', bypass.trim());
+      await LeekFundConfig.setConfig('panxun.extensionHttpProxy', url.trim());
+      await LeekFundConfig.setConfig('panxun.extensionHttpProxyBypass', bypass.trim());
       refreshExtensionHttpProxy();
       window.showInformationMessage(
         url.trim() ? `已保存。${getExtensionHttpProxySummary()}` : '已关闭扩展代理，将直连行情接口'
@@ -763,45 +763,45 @@ export function registerViewEvent(
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.openConfigPage', () => {
-      commands.executeCommand('workbench.action.openSettings', '@ext:giscafer.leek-fund');
+    commands.registerCommand('panxun.openConfigPage', () => {
+      commands.executeCommand('workbench.action.openSettings', '@ext:giscafer.panxun');
     })
   );
 
-  context.subscriptions.push(commands.registerCommand('leek-fund.donate', () => donate(context)));
-  context.subscriptions.push(commands.registerCommand('leek-fund.tucaoForum', () => tucaoForum()));
+  context.subscriptions.push(commands.registerCommand('panxun.donate', () => donate(context)));
+  context.subscriptions.push(commands.registerCommand('panxun.tucaoForum', () => tucaoForum()));
 
   // 选股风向标
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.stockWindVane', () => stockWindVane())
+    commands.registerCommand('panxun.stockWindVane', () => stockWindVane())
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.toggleRemindSwitch', (on?: number) => {
+    commands.registerCommand('panxun.toggleRemindSwitch', (on?: number) => {
       const newValue = on !== undefined ? (on ? 1 : 0) : globalState.remindSwitch === 1 ? 0 : 1;
-      LeekFundConfig.setConfig('leek-fund.stockRemindSwitch', newValue);
+      LeekFundConfig.setConfig('panxun.stockRemindSwitch', newValue);
       globalState.remindSwitch = newValue;
     })
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.toggleKLineChartSwitch', (on?: number) => {
+    commands.registerCommand('panxun.toggleKLineChartSwitch', (on?: number) => {
       const newValue = on !== undefined ? (on ? 1 : 0) : globalState.kLineChartSwitch === 1 ? 0 : 1;
-      LeekFundConfig.setConfig('leek-fund.stockKLineChartSwitch', newValue);
+      LeekFundConfig.setConfig('panxun.stockKLineChartSwitch', newValue);
       globalState.kLineChartSwitch = newValue;
     })
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.toggleStockHeldTipShow', () => {
+    commands.registerCommand('panxun.toggleStockHeldTipShow', () => {
       const newValue = !globalState.stockHeldTipShow;
-      LeekFundConfig.setConfig('leek-fund.stockHeldTipShow', newValue);
+      LeekFundConfig.setConfig('panxun.stockHeldTipShow', newValue);
       globalState.stockHeldTipShow = newValue;
     })
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.changeStatusBarItem', (stockId) => {
+    commands.registerCommand('panxun.changeStatusBarItem', (stockId) => {
       const stockList = stockService.stockList;
       const stockNameList = stockList
         .filter((stock) => stock.id !== stockId)
@@ -821,7 +821,7 @@ export function registerViewEvent(
         })
         .then((res) => {
           if (!res) return;
-          const statusBarStocks = LeekFundConfig.getConfig('leek-fund.statusBarStock');
+          const statusBarStocks = LeekFundConfig.getConfig('panxun.statusBarStock');
           const newCfg = [...statusBarStocks];
           const newStockId = res.description;
           const index = newCfg.indexOf(stockId);
@@ -849,30 +849,30 @@ export function registerViewEvent(
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.immersiveBackground', (isChecked: boolean) => {
-      LeekFundConfig.setConfig('leek-fund.immersiveBackground', isChecked);
+    commands.registerCommand('panxun.immersiveBackground', (isChecked: boolean) => {
+      LeekFundConfig.setConfig('panxun.immersiveBackground', isChecked);
       globalState.immersiveBackground = isChecked;
     })
   );
 
   // Settings Import/Export Commands
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.exportSettings', async () => {
+    commands.registerCommand('panxun.exportSettings', async () => {
       try {
         const workspaceConfig = workspace.getConfiguration();
         const allSettings: any = {};
 
-        // Get all leek-fund settings dynamically from extension context
+        // Get all panxun settings dynamically from extension context
         const extensionManifest = globalState.context.extension.packageJSON;
         const configurationProperties =
           extensionManifest.contributes?.configuration?.properties || {};
 
-        // Filter to only leek-fund configuration keys
+        // Filter to only panxun configuration keys
         const leekFundConfigKeys = Object.keys(configurationProperties).filter((key) =>
-          key.startsWith('leek-fund.')
+          key.startsWith('panxun.')
         );
 
-        // Get all leek-fund settings that have actual values
+        // Get all panxun settings that have actual values
         leekFundConfigKeys.forEach((key) => {
           const value = workspaceConfig.get(key);
           if (value !== undefined) {
@@ -881,7 +881,7 @@ export function registerViewEvent(
         });
 
         // Additional inspection method as fallback to catch any dynamically created settings
-        const leekFundInspection = workspaceConfig.inspect('leek-fund');
+        const leekFundInspection = workspaceConfig.inspect('panxun');
         const inspectionSources = [
           leekFundInspection?.globalValue,
           leekFundInspection?.workspaceValue,
@@ -891,7 +891,7 @@ export function registerViewEvent(
         inspectionSources.forEach((source) => {
           if (source && typeof source === 'object') {
             Object.keys(source).forEach((key) => {
-              const fullKey = `leek-fund.${key}`;
+              const fullKey = `panxun.${key}`;
               if (!allSettings[fullKey]) {
                 const value = workspaceConfig.get(fullKey);
                 if (value !== undefined) {
@@ -903,7 +903,7 @@ export function registerViewEvent(
         });
 
         if (Object.keys(allSettings).length === 0) {
-          window.showInformationMessage('没有找到任何以 "leek-fund." 开头的设置');
+          window.showInformationMessage('没有找到任何以 "panxun." 开头的设置');
           return;
         }
 
@@ -928,7 +928,7 @@ export function registerViewEvent(
   );
 
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.importSettings', async () => {
+    commands.registerCommand('panxun.importSettings', async () => {
       try {
         // Show open dialog
         const uris = await window.showOpenDialog({
@@ -958,16 +958,16 @@ export function registerViewEvent(
           return;
         }
 
-        // Filter settings that start with 'leek-fund.'
+        // Filter settings that start with 'panxun.'
         const leekFundSettings: any = {};
         Object.keys(importedSettings).forEach((key) => {
-          if (key.startsWith('leek-fund.')) {
+          if (key.startsWith('panxun.')) {
             leekFundSettings[key] = importedSettings[key];
           }
         });
 
         if (Object.keys(leekFundSettings).length === 0) {
-          window.showInformationMessage('文件中没有找到任何以 "leek-fund." 开头的设置');
+          window.showInformationMessage('文件中没有找到任何以 "panxun." 开头的设置');
           return;
         }
 
@@ -1003,8 +1003,8 @@ export function registerViewEvent(
           );
 
           // Refresh the extension state
-          commands.executeCommand('leek-fund.refreshFund');
-          commands.executeCommand('leek-fund.refreshStock');
+          commands.executeCommand('panxun.refreshFund');
+          commands.executeCommand('panxun.refreshStock');
         } else {
           window.showErrorMessage('导入设置失败');
         }
@@ -1017,14 +1017,14 @@ export function registerViewEvent(
 
   // 选股宝快讯命令
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.xuangubaoNews', () => {
+    commands.registerCommand('panxun.xuangubaoNews', () => {
       const { XuanGuBaoNewsView } = require('./webview/xuangubao-news');
       XuanGuBaoNewsView.getInstance().show();
     })
   );
   // 设置个股 AI 分析历史长度（A 股 / 港股均生效）
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.setAiStockHistoryRange', async () => {
+    commands.registerCommand('panxun.setAiStockHistoryRange', async () => {
       const QuickPickItems = [
         { label: '1年', description: '1y', picked: false },
         { label: '6个月', description: '6m', picked: false },
@@ -1032,20 +1032,20 @@ export function registerViewEvent(
         { label: '1个月', description: '1m', picked: false },
         { label: '1周', description: '1w', picked: false },
       ];
-      const current = LeekFundConfig.getConfig('leek-fund.aiStockHistoryRange', '3m');
+      const current = LeekFundConfig.getConfig('panxun.aiStockHistoryRange', '3m');
       QuickPickItems.forEach(it => it.picked = it.description === current);
       const sel = await window.showQuickPick(QuickPickItems, {
         placeHolder: '选择个股 AI 分析所用的前复权日线历史长度',
       });
       if (sel && sel.description) {
-        await LeekFundConfig.setConfig('leek-fund.aiStockHistoryRange', sel.description);
+        await LeekFundConfig.setConfig('panxun.aiStockHistoryRange', sel.description);
         window.showInformationMessage(`已设置个股 AI 分析近 ${sel.label} 前复权日线数据`);
       }
     })
   );
   // AI 配置管理
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.openAiConfig', () => {
+    commands.registerCommand('panxun.openAiConfig', () => {
       AiConfigView.getInstance().show();
     })
   );
@@ -1054,22 +1054,22 @@ export function registerViewEvent(
 
 export function registerCommandPaletteEvent(context: ExtensionContext, statusbar: StatusBar) {
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.toggleStatusBarIconVisibility', () => {
+    commands.registerCommand('panxun.toggleStatusBarIconVisibility', () => {
       statusbar.toggleStatusBarIconVisibility();
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.toggleStatusBarVisibility', () => {
+    commands.registerCommand('panxun.toggleStatusBarVisibility', () => {
       statusbar.toggleVisibility();
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.toggleFundBarVisibility', () => {
+    commands.registerCommand('panxun.toggleFundBarVisibility', () => {
       statusbar.toggleFundBarVisibility();
     })
   );
   context.subscriptions.push(
-    commands.registerCommand('leek-fund.toggleStockBarVisibility', () => {
+    commands.registerCommand('panxun.toggleStockBarVisibility', () => {
       statusbar.toggleStockBarVisibility();
     })
   );

@@ -453,13 +453,13 @@ export async function runImportStockHoldings(stockProvider: { refresh: () => voi
   } else {
     next = { ...cfg };
   }
-  await LeekFundConfig.setConfig('leek-fund.stockPrice', next);
+  await LeekFundConfig.setConfig('panxun.stockPrice', next);
   cacheStockPriceData(next);
   const codes = Object.keys(cfg);
   LeekFundConfig.updateStockCfg(codes.join(','), () => {
     stockProvider.refresh();
   });
-  commands.executeCommand('leek-fund.refreshStock');
+  commands.executeCommand('panxun.refreshStock');
   let msg = `已导入 ${codes.length} 只股票持仓`;
   if (warnings.length) {
     msg += `，跳过 ${warnings.length} 行`;

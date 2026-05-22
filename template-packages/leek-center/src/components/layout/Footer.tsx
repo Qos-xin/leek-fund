@@ -23,7 +23,7 @@ export default function LFooter() {
       >
         {/*   <Button
           onClick={() => {
-            postMessage('executeCommand', 'leek-fund.tucaoForum');
+            postMessage('executeCommand', 'panxun.tucaoForum');
           }}
           type="link"
         >
@@ -31,7 +31,7 @@ export default function LFooter() {
         </Button> */}
         <Button
           onClick={() => {
-            postMessage('executeCommand', 'leek-fund.viewFundFlow');
+            postMessage('executeCommand', 'panxun.viewFundFlow');
           }}
           type="link"
         >
@@ -39,7 +39,7 @@ export default function LFooter() {
         </Button>
         <Button
           onClick={() => {
-            postMessage('executeCommand', 'leek-fund.viewMainFundFlow');
+            postMessage('executeCommand', 'panxun.viewMainFundFlow');
           }}
           type="link"
         >

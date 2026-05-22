@@ -1,22 +1,22 @@
-<img src="https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/leek-logo.png" alt="盘讯" width="256"/>
+<img src="https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/leek-logo.png" alt="盘讯" width="256"/>
 
-# leek-fund（盘讯）
+# panxun（盘讯）
 
-<iframe src="https://ghbtns.com/github-btn.html?user=LeekHub&repo=leek-fund&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
+<iframe src="https://ghbtns.com/github-btn.html?user=LeekHub&repo=panxun&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
 
 **盘讯**——在 VSCode 中查看股票、基金与期货实时行情，支持持仓与提醒。
 
 PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alerts.
 
-[![Marketplace](https://img.shields.io/visual-studio-marketplace/v/giscafer.leek-fund.svg?label=Marketplace&style=for-the-badge&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)
-[![Installs](https://img.shields.io/visual-studio-marketplace/i/giscafer.leek-fund.svg?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)
-[![Rating](https://img.shields.io/visual-studio-marketplace/stars/giscafer.leek-fund.svg?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)
+[![Marketplace](https://img.shields.io/visual-studio-marketplace/v/giscafer.panxun.svg?label=Marketplace&style=for-the-badge&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=giscafer.panxun)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/giscafer.panxun.svg?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=giscafer.panxun)
+[![Rating](https://img.shields.io/visual-studio-marketplace/stars/giscafer.panxun.svg?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=giscafer.panxun)
 
 投资有风险，入市需谨慎！
 
 ## Table of contents
 
-- [leek-fund（盘讯）](#leek-fund盘讯)
+- [panxun（盘讯）](#panxun盘讯)
   - [Table of contents](#table-of-contents)
   - [功能特性](#功能特性)
   - [安装使用](#安装使用)
@@ -63,7 +63,7 @@ PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alert
 
 ## 安装使用
 
-安装插件：[VisualStudio - Marketplace](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)，VSCode 最低版本要求：`^1.44.0`
+安装插件：[VisualStudio - Marketplace](https://marketplace.visualstudio.com/items?itemName=giscafer.panxun)，VSCode 最低版本要求：`^1.44.0`
 
 ## 插件介绍
 
@@ -72,7 +72,7 @@ PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alert
 
 ### 概览
 
-![概览](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/overview.png)
+![概览](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/overview.png)
 
 ### 插件设置
 
@@ -80,23 +80,23 @@ PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alert
 
 自定义配置在 **Settings** 视图下：
 
-![设置面板](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/settings.png)
+![设置面板](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/settings.png)
 
 ### OUTPUT 快讯消息
 
 除了盘讯中心里的新闻快讯可以查看新闻，在 OUTPUT 还支持查看金十快讯
 
-![OUTPUT 快讯](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/output.png)
+![OUTPUT 快讯](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/output.png)
 
 ### 盘讯中心
 
 1、有两个入口可以进入
 
-![盘讯中心入口](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/home-entry.png)
+![盘讯中心入口](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/home-entry.png)
 
 2、进入之后可以查看基金和股票详情
 
-![盘讯中心](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/600036.png)
+![盘讯中心](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/600036.png)
 
 ## 社区交流
 
@@ -104,13 +104,13 @@ PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alert
 
 公众号：
 
-<img width="200" alt="微信公众号" src="https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/wechat-qr1.jpg">
+<img width="200" alt="微信公众号" src="https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/wechat-qr1.jpg">
 
 知识星球（赞助插件）：
 
 > PR 贡献开发者可以联系我邀请直接加入
 
-<img width="400" alt="知识星球（赞助插件）" src="https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/zhishixingqiu.jpeg">
+<img width="400" alt="知识星球（赞助插件）" src="https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/zhishixingqiu.jpeg">
 
 ## Core Contributors
 
@@ -137,7 +137,7 @@ PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alert
 - [ChouBaoDxs](https://github.com/ChouBaoDxs)
 
 <!-- <a href="https://github.com/giscafer/leek-fund/graphs/contributors">
-  <img src="https://opencollective.com/leek-fund/contributors.svg?width=960&button=false" alt="contributors" />
+  <img src="https://opencollective.com/panxun/contributors.svg?width=960&button=false" alt="contributors" />
 </a> -->
 
 更多贡献者 [contributors](https://github.com/LeekHub/leek-fund/graphs/contributors)，欢迎来贡献 PR~

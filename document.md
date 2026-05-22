@@ -83,25 +83,25 @@
 
 ### 概览
 
-![概览](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/overview.png)
+![概览](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/overview.png)
 
 ### 新增
 
-![GUI新增操作](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/add1.png)
+![GUI新增操作](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/add1.png)
 
 ### 快速删除
 
-![GUI删除操作](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/del.png)
+![GUI删除操作](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/del.png)
 
 ### 刷新数据
 
-![刷新数据](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/refresh-data.png)
+![刷新数据](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/refresh-data.png)
 
 ### 股票 和 基金 搜索添加
 
-![股票搜索添加](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/stock-search.png)
+![股票搜索添加](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/stock-search.png)
 
-![股票搜索添加](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/fund-search.png)
+![股票搜索添加](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/fund-search.png)
 
 ### 排序
 
@@ -115,49 +115,49 @@
 
 点击的时候是这三种情况循环切换的。
 
-![升序/降序排序](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/sort.png)
+![升序/降序排序](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/sort.png)
 
 ### 趋势图和 K 线图
 
-![股票实时K线图](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/stock-k-line.png)
+![股票实时K线图](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/stock-k-line.png)
 
 ### 基金历史净值
 
-![基金历史净值](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/fund-history.png)
+![基金历史净值](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/fund-history.png)
 
 ### 基金走势图
 
-![基金走势图](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/trend-chart.png)
+![基金走势图](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/trend-chart.png)
 
 ### 基金排行榜
 
-![基金排行榜](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/ranking.png)
+![基金排行榜](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/ranking.png)
 
 ### 股市资金流向（沪深港通资金流向、北向资金、南向资金）
 
-![资金流向](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/fund-flow.png)
+![资金流向](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/fund-flow.png)
 
 ### 设置面板
 
 > v1.3.0
 
-![设置面板](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/settings.png)
+![设置面板](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/settings.png)
 
 ## OUTPUT 快讯消息
 
 除了盘讯中心里的新闻快讯可以查看新闻，在 OUTPUT 还支持查看金十快讯
 
-![OUTPUT 快讯](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/output.png)
+![OUTPUT 快讯](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/output.png)
 
 ## 盘讯中心
 
 1、有两个入口可以进入
 
-![盘讯中心](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/home-entry.png)
+![盘讯中心](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/home-entry.png)
 
 2、进入之后可以查看基金和股票详情
 
-![盘讯中心](https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/600036.png)
+![盘讯中心](https://raw.githubusercontents.com/LeekHub/panxun/master/screenshot/600036.png)
 
 ## 插件配置
 
@@ -177,7 +177,7 @@
         // 美股指数代码，如道琼斯指数: usr_dji，纳斯达克: usr_ixic，标普500: usr_inx
         // 如配置后没有数据，可以用这个链接测试一下是否有返回数据：https://hq.sinajs.cn/list=hk00700
 
-        "leek-fund.stocks": {
+        "panxun.stocks": {
           "type": "array",
           "default": [
             "sh000001",
@@ -194,7 +194,7 @@
         },
 
         // 配置需要监控的基金代码
-        "leek-fund.funds": {
+        "panxun.funds": {
           "type": "array",
           "default": [
             "001632",
@@ -208,24 +208,24 @@
           ],
           "description": "配置需要监控的基金代码（建议通过界面新增）"
         },
-        "leek-fund.statusBarStock": {
+        "panxun.statusBarStock": {
           "type": "array",
           "default": [
             "sh000001"
           ],
           "description": "状态栏展示的股票（建议通过界面选择设置，必须是在股票代码已设置存在）"
         },
-        "leek-fund.interval": {
+        "panxun.interval": {
           "type": "number",
           "default": 5000,
           "description": "配置轮询请求最新数据的时间间隔，单位：毫秒（最小轮询间隔是3秒）"
         },
-        "leek-fund.riseColor": {
+        "panxun.riseColor": {
           "type": "string",
           "default": "white",
           "description": "股票涨的颜色"
         },
-        "leek-fund.fallColor": {
+        "panxun.fallColor": {
           "type": "string",
           "default": "#C9AD06",
           "description": "股票跌的颜色"

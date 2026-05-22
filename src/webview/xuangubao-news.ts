@@ -98,7 +98,7 @@ export class XuanGuBaoNewsView {
     }
 
     const cfg = workspace.getConfiguration();
-    const range: string = cfg.get('leek-fund.aiStockHistoryRange', '3m');
+    const range: string = cfg.get('panxun.aiStockHistoryRange', '3m');
     const rangeLabel = {
       '1y': '近1年',
       '6m': '近6个月',
@@ -178,7 +178,7 @@ export class XuanGuBaoNewsView {
   }
 
   getAiConfig(): AiConfig {
-    const cfgKey = 'leek-fund.aiConfig';
+    const cfgKey = 'panxun.aiConfig';
     const config = workspace.getConfiguration();
     const result = config.get(cfgKey, {
       apiKey: '',
@@ -189,7 +189,7 @@ export class XuanGuBaoNewsView {
   }
 
   updateAiConfig(aiConfig: AiConfig, cb?: Function) {
-    const cfgKey = 'leek-fund.aiConfig';
+    const cfgKey = 'panxun.aiConfig';
     const config = workspace.getConfiguration();
     config.update(cfgKey, aiConfig, true).then(() => {
       console.log('AI配置更新成功');

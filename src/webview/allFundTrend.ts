@@ -85,7 +85,7 @@ async function allFundTrend(service: FundService) {
             <p class="title" style="margin-top:6px">历史趋势图</p>
             <img
               class="fund-trend"
-              src="https://giscafer.gallerycdn.vsassets.io/extensions/giscafer/leek-fund/1.1.5/1597052433264/Microsoft.VisualStudio.Services.Icons.Default"
+              src="https://giscafer.gallerycdn.vsassets.io/extensions/giscafer/panxun/1.1.5/1597052433264/Microsoft.VisualStudio.Services.Icons.Default"
               alt=""
             />
           </div>

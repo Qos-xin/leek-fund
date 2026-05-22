@@ -221,7 +221,7 @@ function setList(
 }
 
 export function setStocksRemindCfgCb(cfg: Object) {
-  LeekFundConfig.setConfig('leek-fund.stocksRemind', cfg).then(
+  LeekFundConfig.setConfig('panxun.stocksRemind', cfg).then(
     () => {
       window.showInformationMessage('价格预警保存成功！');
       cacheStocksRemindData(cfg);

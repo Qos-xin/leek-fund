@@ -27,19 +27,19 @@ export class ProfitStatusBar {
   }
 
   init() {
-    this.isEnable = LeekFundConfig.getConfig('leek-fund.showEarnings');
-    this.hideStatusBar = LeekFundConfig.getConfig('leek-fund.hideStatusBar');
+    this.isEnable = LeekFundConfig.getConfig('panxun.showEarnings');
+    this.hideStatusBar = LeekFundConfig.getConfig('panxun.hideStatusBar');
     //如果显示收益 && 显示状态栏
     if (this.isEnable && !this.hideStatusBar) {
-      this.riseColor = LeekFundConfig.getConfig('leek-fund.riseColor');
-      this.fallColor = LeekFundConfig.getConfig('leek-fund.fallColor');
+      this.riseColor = LeekFundConfig.getConfig('panxun.riseColor');
+      this.fallColor = LeekFundConfig.getConfig('panxun.fallColor');
       this.fundBarItem = window.createStatusBarItem(StatusBarAlignment.Left, 2);
       this.fundBarItem.text = `${PREFIX} --`;
-      this.fundBarItem.command = 'leek-fund.setFundAmount';
+      this.fundBarItem.command = 'panxun.setFundAmount';
       this.fundBarItem.show();
       this.stockBarItem = window.createStatusBarItem(StatusBarAlignment.Left, 3);
       this.stockBarItem.text = `${PREFIX}  --`;
-      this.stockBarItem.command = 'leek-fund.setStockPrice';
+      this.stockBarItem.command = 'panxun.setStockPrice';
       this.stockBarItem.show();
 
       const profitUpdateListener = (data: ProfitStatusBarInfo) => {
@@ -59,10 +59,10 @@ export class ProfitStatusBar {
   }
 
   reload() {
-    this.riseColor = LeekFundConfig.getConfig('leek-fund.riseColor');
-    this.fallColor = LeekFundConfig.getConfig('leek-fund.fallColor');
-    const enable: boolean = LeekFundConfig.getConfig('leek-fund.showEarnings');
-    const hideStatusBar: boolean = LeekFundConfig.getConfig('leek-fund.hideStatusBar');
+    this.riseColor = LeekFundConfig.getConfig('panxun.riseColor');
+    this.fallColor = LeekFundConfig.getConfig('panxun.fallColor');
+    const enable: boolean = LeekFundConfig.getConfig('panxun.showEarnings');
+    const hideStatusBar: boolean = LeekFundConfig.getConfig('panxun.hideStatusBar');
     if (this.isEnable !== enable || this.hideStatusBar !== hideStatusBar) {
       this.isEnable = enable;
       this.hideStatusBar = hideStatusBar;

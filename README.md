@@ -1,7 +1,7 @@
 <div align="center">
 <img src="./screenshot/leek-logo.png" alt="盘讯" width="256"/>
 
-# leek-fund（盘讯）
+# panxun（盘讯）
 
 > v3.20.5+ 版本已集成 AI Agent
 
@@ -9,9 +9,9 @@
 
 PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alerts.
 
-[![Marketplace](https://img.shields.io/visual-studio-marketplace/v/giscafer.leek-fund.svg?label=Marketplace&style=for-the-badge&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)
-[![Installs](https://img.shields.io/visual-studio-marketplace/i/giscafer.leek-fund.svg?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)
-[![Rating](https://img.shields.io/visual-studio-marketplace/stars/giscafer.leek-fund.svg?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)
+[![Marketplace](https://img.shields.io/visual-studio-marketplace/v/giscafer.panxun.svg?label=Marketplace&style=for-the-badge&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=giscafer.panxun)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/giscafer.panxun.svg?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=giscafer.panxun)
+[![Rating](https://img.shields.io/visual-studio-marketplace/stars/giscafer.panxun.svg?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=giscafer.panxun)
 
 投资有风险，入市需谨慎！
 
@@ -19,7 +19,7 @@ PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alert
 
 ## Table of contents
 
-- [leek-fund（盘讯）](#leek-fund盘讯)
+- [panxun（盘讯）](#panxun盘讯)
   - [Table of contents](#table-of-contents)
   - [功能特性](#功能特性)
   - [安装使用](#安装使用)
@@ -68,7 +68,7 @@ PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alert
 
 ## Installation
 
-安装插件：[VisualStudio - Marketplace](https://marketplace.visualstudio.com/items?itemName=giscafer.leek-fund)，VSCode 最低版本要求：`^1.44.0`
+安装插件：[VisualStudio - Marketplace](https://marketplace.visualstudio.com/items?itemName=giscafer.panxun)，VSCode 最低版本要求：`^1.44.0`
 
 ## Introduction
 
@@ -109,7 +109,7 @@ PanXun - Stock, fund & futures quotes in VSCode with portfolio helpers and alert
 ## All Thanks To Our Contributors
 
 <a href="https://github.com/LeekHub/leek-fund/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=LeekHub/leek-fund" />
+  <img src="https://contrib.rocks/image?repo=LeekHub/panxun" />
 </a>
 
 ## Contributing
@@ -118,7 +118,7 @@ Please follow our [contributing guidelines](./.github/CONTRIBUTING.md).
 
 **避免插件发布出现异常，贡献者请遵循**：
 
-- 本地开发调试完成后，建议执行 `yarn package` 进行打包出 `leek-fund-xx.vsix` 文件
+- 本地开发调试完成后，建议执行 `yarn package` 进行打包出 `panxun-xx.vsix` 文件
 - VSCode编辑器插件选择从VSIX安装，测试验证功能正常后再push代码提交PR
 
 

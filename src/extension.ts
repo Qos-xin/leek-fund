@@ -49,13 +49,13 @@ export async function activate(context: ExtensionContext) {
   globalState.isDevelopment = process.env.NODE_ENV === 'development';
   globalState.context = context;
 
-  /** 扩展自有 HTTP 代理：强制 axios 不走 VS Code 的全局 http.proxy，仅认 leek-fund.extensionHttpProxy */
+  /** 扩展自有 HTTP 代理：强制 axios 不走 VS Code 的全局 http.proxy，仅认 panxun.extensionHttpProxy */
   installExtensionHttpProxy();
 
   const telemetry = new Telemetry();
   globalState.telemetry = telemetry;
 
-  let intervalTimeConfig = LeekFundConfig.getConfig('leek-fund.interval', 5000);
+  let intervalTimeConfig = LeekFundConfig.getConfig('panxun.interval', 5000);
   let intervalTime = intervalTimeConfig;
 
   // 节假日，异步会存在延迟判断准确问题，设置成同步影响插件激活速度，暂使用异步
@@ -90,34 +90,34 @@ export async function activate(context: ExtensionContext) {
   profitBar = new ProfitStatusBar();
 
   // create fund & stock side views
-  fundTreeView = window.createTreeView('leekFundView.fund', {
+  fundTreeView = window.createTreeView('panxunView.fund', {
     treeDataProvider: nodeFundProvider,
   });
 
-  stockTreeView = window.createTreeView('leekFundView.stock', {
+  stockTreeView = window.createTreeView('panxunView.stock', {
     treeDataProvider: nodeStockProvider,
   });
 
-  binanceTreeView = window.createTreeView('leekFundView.binance', {
+  binanceTreeView = window.createTreeView('panxunView.binance', {
     treeDataProvider: binanceProvider,
   });
 
-  forexTreeView = window.createTreeView('leekFundView.forex', {
+  forexTreeView = window.createTreeView('panxunView.forex', {
     treeDataProvider: forexProvider,
   });
 
-  window.createTreeView('leekFundView.news', {
+  window.createTreeView('panxunView.news', {
     treeDataProvider: newsProvider,
   });
 
   // fix when TreeView collapse https://github.com/giscafer/leek-fund/issues/31
   const manualRequest = () => {
-    const fundLists = LeekFundConfig.getConfig('leek-fund.funds') || [];
+    const fundLists = LeekFundConfig.getConfig('panxun.funds') || [];
     fundLists.forEach((value: Array<string>, index: number) => {
       fundService.getData(value, SortType.NORMAL, `fundGroup_${index}`);
     });
 
-    stockService.getData(LeekFundConfig.getConfig('leek-fund.stocks'), SortType.NORMAL);
+    stockService.getData(LeekFundConfig.getConfig('panxun.stocks'), SortType.NORMAL);
   };
 
   manualRequest();
@@ -200,12 +200,12 @@ export async function activate(context: ExtensionContext) {
   workspace.onDidChangeConfiguration((e: ConfigurationChangeEvent) => {
     Log.info('Configuration changed');
     if (
-      e.affectsConfiguration('leek-fund.extensionHttpProxy') ||
-      e.affectsConfiguration('leek-fund.extensionHttpProxyBypass')
+      e.affectsConfiguration('panxun.extensionHttpProxy') ||
+      e.affectsConfiguration('panxun.extensionHttpProxyBypass')
     ) {
       refreshExtensionHttpProxy();
     }
-    intervalTimeConfig = LeekFundConfig.getConfig('leek-fund.interval');
+    intervalTimeConfig = LeekFundConfig.getConfig('panxun.interval');
     setIntervalTime();
     setGlobalVariable();
     statusBar.refresh();
@@ -250,50 +250,50 @@ export async function activate(context: ExtensionContext) {
 }
 
 function setGlobalVariable() {
-  const stockPrice = LeekFundConfig.getConfig('leek-fund.stockPrice') || {};
+  const stockPrice = LeekFundConfig.getConfig('panxun.stockPrice') || {};
   cacheStockPriceData(stockPrice);
 
-  const fundAmount = LeekFundConfig.getConfig('leek-fund.fundAmount') || {};
+  const fundAmount = LeekFundConfig.getConfig('panxun.fundAmount') || {};
   cacheFundAmountData(fundAmount);
 
-  globalState.iconType = LeekFundConfig.getConfig('leek-fund.iconType') || 'arrow';
+  globalState.iconType = LeekFundConfig.getConfig('panxun.iconType') || 'arrow';
 
-  globalState.stockHeldTipShow = LeekFundConfig.getConfig('leek-fund.stockHeldTipShow') ?? true;
+  globalState.stockHeldTipShow = LeekFundConfig.getConfig('panxun.stockHeldTipShow') ?? true;
 
-  const stocksRemind = LeekFundConfig.getConfig('leek-fund.stocksRemind') || {};
+  const stocksRemind = LeekFundConfig.getConfig('panxun.stocksRemind') || {};
   cacheStocksRemindData(stocksRemind);
 
-  globalState.showEarnings = LeekFundConfig.getConfig('leek-fund.showEarnings');
+  globalState.showEarnings = LeekFundConfig.getConfig('panxun.showEarnings');
 
-  globalState.remindSwitch = LeekFundConfig.getConfig('leek-fund.stockRemindSwitch');
+  globalState.remindSwitch = LeekFundConfig.getConfig('panxun.stockRemindSwitch');
 
-  globalState.kLineChartSwitch = LeekFundConfig.getConfig('leek-fund.stockKLineChartSwitch');
+  globalState.kLineChartSwitch = LeekFundConfig.getConfig('panxun.stockKLineChartSwitch');
 
-  globalState.labelFormat = LeekFundConfig.getConfig('leek-fund.labelFormat');
+  globalState.labelFormat = LeekFundConfig.getConfig('panxun.labelFormat');
 
-  globalState.immersiveBackground = LeekFundConfig.getConfig('leek-fund.immersiveBackground', true);
+  globalState.immersiveBackground = LeekFundConfig.getConfig('panxun.immersiveBackground', true);
 
-  globalState.fundGroups = LeekFundConfig.getConfig('leek-fund.fundGroups') || [];
+  globalState.fundGroups = LeekFundConfig.getConfig('panxun.fundGroups') || [];
 
-  const fundLists = LeekFundConfig.getConfig('leek-fund.funds') || [];
+  const fundLists = LeekFundConfig.getConfig('panxun.funds') || [];
   if (typeof fundLists[0] === 'string' || fundLists[0] instanceof String) {
     // 迁移用户的基金代码到分组模式
     const newFundLists = [fundLists];
     globalState.fundLists = newFundLists;
-    LeekFundConfig.setConfig('leek-fund.funds', newFundLists);
+    LeekFundConfig.setConfig('panxun.funds', newFundLists);
   } else {
     globalState.fundLists = fundLists;
   }
   // 临时解决3.10.1~3.10.3 pr产生的分组bug
-  // const leekFundExt = extensions.getExtension('giscafer.leek-fund');
+  // const leekFundExt = extensions.getExtension('giscafer.panxun');
   // const currentVersion = leekFundExt?.packageJSON?.version;
   // if (compare(currentVersion, '3.9.2', '>=')) {
-  // const arr = LeekFundConfig.getConfig('leek-fund.stocks') || [];
+  // const arr = LeekFundConfig.getConfig('panxun.stocks') || [];
   // const flag = arr.some((a: any) => Array.isArray(a));
   // if (flag) {
   //   const stockList = uniq(compact(flattenDeep(arr)));
   //   Log.info(" ~ setGlobalVariable ~ stockList:", stockList);
-  //   LeekFundConfig.setConfig('leek-fund.stocks', stockList);
+  //   LeekFundConfig.setConfig('panxun.stocks', stockList);
   // }
 
   // }

@@ -50,8 +50,8 @@ A good PR is small, focuses on a single feature or improvement, and clearly comm
 2. Clone the fork to your local machine and add upstream remote:
 
 ```sh
-git clone https://github.com/<your username>/leek-fund.git
-cd leek-fund
+git clone https://github.com/<your username>/panxun.git
+cd panxun
 git remote add upstream https://github.com/LeekHub/leek-fund.git
 ```
 
